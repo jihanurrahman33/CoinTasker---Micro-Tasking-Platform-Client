@@ -1,14 +1,30 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxios from "../../../hooks/useAxios";
 
 const SocialLogin = () => {
   const { googleSignIn, loading } = useAuth();
+  const axiosInstance = useAxios();
   const handleSocialLogin = async () => {
     // Implement social login logic here
     const result = await googleSignIn();
     if (result.user.accessToken) {
+      const userInfo = {
+        name: result.user.displayName,
+        email: result.user.email,
+        photoURL: result.user.photoURL,
+        role: "worker",
+      };
       // Successful login
+      axiosInstance
+        .post("/users", userInfo)
+        .then((res) => {
+          console.log("User info saved to backend:", res.data);
+        })
+        .catch((err) => {
+          console.error("Error saving user info to backend:", err);
+        });
       toast("Login successful");
     } else {
       toast("Login failed");

@@ -3,7 +3,9 @@ import { Link } from "react-router";
 import { AuthContext } from "../../../contexts/AuthContext/AuthContext";
 
 const NavBar = () => {
+  // const { role } = useRole();
   const { user, logOut } = use(AuthContext);
+
   const links = (
     <>
       <li>
