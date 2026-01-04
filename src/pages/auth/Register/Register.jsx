@@ -7,9 +7,11 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../../firebase/firebase.init";
+import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
   const { loading, setLoading, createUser } = useAuth();
+  const axiosInstance = useAxios();
   const {
     register,
     handleSubmit,
@@ -46,6 +48,20 @@ const Register = () => {
         return null;
       });
     if (result?.user) {
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+        photoURL: data.photoURL,
+        role: data.role,
+      };
+      axiosInstance
+        .post("/users", userInfo)
+        .then((res) => {
+          console.log("User info saved to backend:", res.data);
+        })
+        .catch((err) => {
+          console.error("Error saving user info to backend:", err);
+        });
       toast.success("Registration successful!");
     } else {
       toast.error("Registration failed. Please try again.");
