@@ -3,8 +3,13 @@ import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "../../../components/shared/Buttons/SocialLogin";
+import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../../firebase/firebase.init";
 
 const Register = () => {
+  const { loading, setLoading, createUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -12,9 +17,39 @@ const Register = () => {
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     // Handle registration logic here
+    const result = await createUser(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        updateProfile(auth.currentUser, {
+          displayName: data.name,
+          photoURL: data.photoURL,
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+          })
+          .catch((error) => {
+            console.log(error);
+            // An error occurred
+            // ...
+          });
+
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        return null;
+      });
+    if (result?.user) {
+      toast.success("Registration successful!");
+    } else {
+      toast.error("Registration failed. Please try again.");
+    }
   };
 
   return (
@@ -145,7 +180,7 @@ const Register = () => {
                     },
                     pattern: {
                       value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
                       message:
                         "Must contain uppercase, lowercase, number, and special char",
                     },
@@ -196,6 +231,7 @@ const Register = () => {
               <button
                 type="submit"
                 className="btn btn-primary text-white text-lg"
+                disabled={loading}
               >
                 Register
               </button>
@@ -205,7 +241,7 @@ const Register = () => {
           <div className="divider">OR</div>
 
           {/* Google Login */}
-          <SocialLogin/>
+          <SocialLogin />
 
           <p className="text-center mt-6">
             Already have an account?{" "}

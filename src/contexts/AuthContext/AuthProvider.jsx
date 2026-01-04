@@ -50,6 +50,7 @@ const AuthProvider = ({ children }) => {
     emailPasswordLogin,
     googleSignIn,
     logOut,
+    setLoading,
   };
 
   return <AuthContext value={authInfo}>{children}</AuthContext>;
