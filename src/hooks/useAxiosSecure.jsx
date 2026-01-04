@@ -10,10 +10,18 @@ const useAxiosSecure = () => {
   const { user, logOut } = useAuth();
   useEffect(() => {
     //intercept request
-    const reqInterceptor = axiosSecure.interceptors.request.use((config) => {
-      config.headers.Authorization = `Bearer ${user?.accessToken}`;
-      return config;
-    });
+    const reqInterceptor = axiosSecure.interceptors.request.use(
+      async (config) => {
+        if (user) {
+          const token = await user.getIdToken();
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
     //interceptor response
     const responseInterceptor = axiosSecure.interceptors.response.use(
       (response) => {
@@ -33,8 +41,8 @@ const useAxiosSecure = () => {
 
     //interceptor request
     return () => {
-      axios.interceptors.request.eject(reqInterceptor);
-      axios.interceptors.response.eject(responseInterceptor);
+      axiosSecure.interceptors.request.eject(reqInterceptor);
+      axiosSecure.interceptors.response.eject(responseInterceptor);
     };
   }, [user, logOut, navigate]);
   return axiosSecure;
