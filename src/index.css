@@ -1,8 +1,15 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 @plugin "daisyui";
+
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: blue;
-  --color-secondary: teal;
+  --color-primary: #3C6E1F;
+  --color-secondary: #B45F06;
+}
+
+@theme {
+  --font-sans: "Inter", sans-serif;
 }
