@@ -1,22 +1,24 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const SocialLogin = () => {
-  const { googleSignIn } = useAuth();
+  const { googleSignIn, loading } = useAuth();
   const handleSocialLogin = async () => {
     // Implement social login logic here
     const result = await googleSignIn();
     if (result.user.accessToken) {
       // Successful login
-      console.log("Login successful");
+      toast("Login successful");
     } else {
-      console.log("Login failed");
+      toast("Login failed");
     }
   };
   return (
     <button
       onClick={handleSocialLogin}
       className="btn bg-white text-black border-[#e5e5e5]"
+      disabled={loading}
     >
       <svg
         aria-label="Google logo"
