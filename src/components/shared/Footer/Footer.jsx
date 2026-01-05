@@ -1,9 +1,11 @@
 import React from "react";
 
+import Logo from "../Logo/Logo";
+
 const Footer = () => {
   return <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
   <aside>
-    <p>App Name</p>
+    <Logo />
     <p>
       ACME Industries Ltd.
       <br />

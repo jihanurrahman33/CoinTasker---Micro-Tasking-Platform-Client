@@ -16,6 +16,7 @@ import useRole from "../hooks/useRole";
 import useAuth from "../hooks/useAuth";
 import Footer from "../components/shared/Footer/Footer";
 import AvailableCoin from "../components/shared/Buttons/AvailableCoin";
+import Logo from "../components/shared/Logo/Logo";
 
 const DashboardLayout = () => {
   const { role, roleLoading } = useRole();
@@ -116,7 +117,7 @@ const DashboardLayout = () => {
             </svg>
           </label>
           <div className="px-4 flex justify-between items-center w-full">
-            <div className="font-bold text-lg">CoinTasker</div>
+            <Logo />
             <div className="flex items-center gap-4">
               {/* Available Coin - Only for Buyer/Worker */}
               {(role === "worker" || role === "buyer") && <AvailableCoin />}
