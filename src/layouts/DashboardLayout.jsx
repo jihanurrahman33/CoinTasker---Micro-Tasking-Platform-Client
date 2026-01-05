@@ -43,7 +43,7 @@ const DashboardLayout = () => {
 
     if (role === "worker") {
       items = [
-        { to: "/dashboard/worker-home", icon: FaHome, label: "Home" },
+        { to: "/dashboard", icon: FaHome, label: "Home" },
         { to: "/dashboard/task-list", icon: FaList, label: "Task List" },
         {
           to: "/dashboard/my-submissions",

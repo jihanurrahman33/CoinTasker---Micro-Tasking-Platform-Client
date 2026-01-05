@@ -6,6 +6,9 @@ import Login from "../pages/auth/Login/Login";
 import PublicRoute from "./PublicRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/dashboard/home/DashboardHome";
+import Tasklist from "../pages/dashboard/Worker/Tasklist/Tasklist";
+import MySubmissions from "../pages/dashboard/Worker/MySubmissions/MySubmissions";
+import Withdrawals from "../pages/dashboard/Worker/Withdrawals/Withdrawals";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +44,19 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <DashboardHome />,
+      },
+      {
+        path: "task-list",
+        element: <Tasklist />,
+      },
+
+      {
+        path: "my-submissions",
+        element: <MySubmissions />,
+      },
+      {
+        path: "withdrawals",
+        element: <Withdrawals />,
       },
     ],
   },
