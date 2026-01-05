@@ -13,6 +13,8 @@ import AddTask from "../pages/dashboard/Buyer/AddTask/AddTask";
 import MyTask from "../pages/dashboard/Buyer/MyTask/MyTask";
 import PurchaseCoin from "../pages/dashboard/Buyer/PurchaseCoin/PurchaseCoin";
 import PaymentHistory from "../pages/dashboard/Buyer/PaymentHistory/PaymentHistory";
+import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
+import ManageTasks from "../pages/dashboard/Admin/ManageTasks/ManageTasks";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +81,15 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentHistory />,
+      },
+      //admin Routes
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "manage-tasks",
+        element: <ManageTasks />,
       },
     ],
   },

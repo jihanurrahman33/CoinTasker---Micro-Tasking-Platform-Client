@@ -78,7 +78,7 @@ const DashboardLayout = () => {
       ];
     } else if (role === "admin") {
       items = [
-        { to: "/dashboard/admin-home", icon: FaHome, label: "Home" },
+        { to: "/dashboard", icon: FaHome, label: "Home" },
         { to: "/dashboard/manage-users", icon: FaUsers, label: "Manage Users" },
         { to: "/dashboard/manage-tasks", icon: FaTasks, label: "Manage Tasks" },
       ];
@@ -160,6 +160,7 @@ const DashboardLayout = () => {
               <li key={index}>
                 <NavLink
                   to={item.to}
+                  end={item.to === "/dashboard"}
                   className={({ isActive }) =>
                     `is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center p-2 rounded-btn ${
                       isActive ? "bg-primary text-white" : "hover:bg-base-300"
