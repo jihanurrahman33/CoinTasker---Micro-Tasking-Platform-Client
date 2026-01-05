@@ -58,7 +58,7 @@ const DashboardLayout = () => {
       ];
     } else if (role === "buyer") {
       items = [
-        { to: "/dashboard/buyer-home", icon: FaHome, label: "Home" },
+        { to: "/dashboard", icon: FaHome, label: "Home" },
         {
           to: "/dashboard/add-task",
           icon: FaPlusCircle,

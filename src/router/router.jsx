@@ -9,6 +9,10 @@ import DashboardHome from "../pages/dashboard/home/DashboardHome";
 import Tasklist from "../pages/dashboard/Worker/Tasklist/Tasklist";
 import MySubmissions from "../pages/dashboard/Worker/MySubmissions/MySubmissions";
 import Withdrawals from "../pages/dashboard/Worker/Withdrawals/Withdrawals";
+import AddTask from "../pages/dashboard/Buyer/AddTask/AddTask";
+import MyTask from "../pages/dashboard/Buyer/MyTask/MyTask";
+import PurchaseCoin from "../pages/dashboard/Buyer/PurchaseCoin/PurchaseCoin";
+import PaymentHistory from "../pages/dashboard/Buyer/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +49,7 @@ export const router = createBrowserRouter([
         index: true,
         element: <DashboardHome />,
       },
+      // Worker Routes
       {
         path: "task-list",
         element: <Tasklist />,
@@ -57,6 +62,23 @@ export const router = createBrowserRouter([
       {
         path: "withdrawals",
         element: <Withdrawals />,
+      },
+      //Buyer Routes
+      {
+        path: "add-task",
+        element: <AddTask />,
+      },
+      {
+        path: "my-tasks",
+        element: <MyTask />,
+      },
+      {
+        path: "purchase-coin",
+        element: <PurchaseCoin />,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory />,
       },
     ],
   },
