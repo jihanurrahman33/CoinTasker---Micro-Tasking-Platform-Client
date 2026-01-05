@@ -37,7 +37,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      localStorage.removeItem("access-token");
+      if (currentUser) {
+        currentUser
+          .getIdToken()
+          .then((token) => {
+            localStorage.setItem("access-token", token);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error getting ID token:", error);
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
     });
     return () => {
       unsubscribe();

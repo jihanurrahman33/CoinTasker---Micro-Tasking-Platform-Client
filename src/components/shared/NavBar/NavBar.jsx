@@ -1,15 +1,36 @@
 import React, { use } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../../contexts/AuthContext/AuthContext";
+import AvailableCoin from "../Buttons/AvailableCoin";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const NavBar = () => {
+  const axiosSecure = useAxiosSecure();
   const { user, logOut } = use(AuthContext);
+  const { data: coinBalance = 0 } = useQuery({
+    queryKey: ["coinBalance", user?.email],
+    queryFn: async () => {
+      if (user?.email) {
+        const res = await axiosSecure.get(`/users/${user.email}/coin`);
+
+        return res.data.coin;
+      }
+      return null;
+    },
+    enabled: !!user?.email,
+  });
 
   const links = (
     <>
       <li>
         <Link to="/">Home</Link>
       </li>
+      {user && (
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -48,9 +69,20 @@ const NavBar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <button onClick={logOut} className="btn">
-              Log Out
-            </button>
+            <div className="space-x-4 flex items-center">
+              <AvailableCoin amount={coinBalance} />
+              <div className="avatar">
+                <div className="w-10 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
+              </div>
+              <button onClick={logOut} className="btn">
+                Log Out
+              </button>
+              <Link to="/join" className="btn">
+                Join as a Developer
+              </Link>
+            </div>
           ) : (
             <>
               <Link to="/login" className="btn">
@@ -61,9 +93,6 @@ const NavBar = () => {
               </Link>
             </>
           )}
-          <Link to="/join" className="btn">
-            Join as a Developer
-          </Link>
         </div>
       </div>
     </header>
