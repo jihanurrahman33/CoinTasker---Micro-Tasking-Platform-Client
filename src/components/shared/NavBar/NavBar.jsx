@@ -55,7 +55,7 @@ const NavBar = () => {
                   Register
                 </Link>
                 <a
-                  href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-nishak53"
+                  href="https://github.com/jihanurrahman33"
                   target="_blank"
                   className="btn btn-outline border-base-300 hover:bg-base-200"
                 >
