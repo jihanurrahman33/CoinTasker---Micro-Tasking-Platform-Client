@@ -3,15 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
+import Loading from "../components/shared/Loading/Loading";
 
-const AdminRoute = ({ children }) => {
+const BuyerRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
-
   if (!user) {
     return <Navigate to="/login" />;
   }
@@ -28,18 +28,14 @@ const AdminRoute = ({ children }) => {
     },
   });
 
-  
   if (isLoading) {
-    return <div>Checking permissions...</div>;
+    return <Loading />;
   }
-
-  
-  if (currentUser?.role !== "admin") {
+  if (currentUser?.role !== "buyer") {
     return <Navigate to="/dashboard" />;
   }
 
-  
   return children;
 };
 
-export default AdminRoute;
+export default BuyerRoute;

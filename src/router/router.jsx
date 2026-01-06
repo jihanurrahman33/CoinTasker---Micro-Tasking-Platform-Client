@@ -18,11 +18,15 @@ import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
 import ManageTasks from "../pages/dashboard/Admin/ManageTasks/ManageTasks";
 import PaymentSuccess from "../pages/dashboard/PaymentSuccess/PaymentSuccess";
 import PaymentCancelled from "../pages/dashboard/PaymentSuccess/PaymentCancelled";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
+import WorkerRoute from "./WorkerRoute";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: MainLayout,
+    element: <MainLayout />,
     children: [
       {
         index: true,
@@ -48,7 +52,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    Component: DashboardLayout,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     children: [
       {
         index: true,
@@ -57,53 +61,54 @@ export const router = createBrowserRouter([
       // Worker Routes
       {
         path: "task-list",
-        element: <Tasklist />,
+        element: <WorkerRoute><Tasklist /></WorkerRoute>,
       },
       {
         path: "task-list/:id",
-        element: <TaskDetails />,
+        element: <WorkerRoute><TaskDetails /></WorkerRoute>,
       },
       {
         path: "my-submissions",
-        element: <MySubmissions />,
+        element: <WorkerRoute><MySubmissions /></WorkerRoute>,
       },
       {
         path: "withdrawals",
-        element: <Withdrawals />,
+        element: <WorkerRoute><Withdrawals /></WorkerRoute>,
       },
       //Buyer Routes
       {
         path: "add-task",
-        element: <AddTask />,
+        element: <BuyerRoute><AddTask /></BuyerRoute>,
       },
       {
         path: "my-tasks",
-        element: <MyTask />,
+        element: <BuyerRoute><MyTask /></BuyerRoute>,
       },
       {
         path: "purchase-coin",
-        element: <PurchaseCoin />,
+        element: <BuyerRoute><PurchaseCoin /></BuyerRoute>,
       },
       {
         path: "payment-history",
-        element: <PaymentHistory />,
+        element: <BuyerRoute><PaymentHistory /></BuyerRoute>,
       },
       //admin Routes
       {
         path: "manage-users",
-        element: <ManageUsers />,
+        element: <AdminRoute><ManageUsers /></AdminRoute>,
       },
       {
         path: "manage-tasks",
-        element: <ManageTasks />,
+        element: <AdminRoute><ManageTasks /></AdminRoute>,
       },
+      //payment routes buyer
       {
         path: "payment-success",
-        element: <PaymentSuccess />,
+        element: <BuyerRoute><PaymentSuccess /></BuyerRoute>,
       },
       {
         path: "payment-cancelled",
-        element: <PaymentCancelled />,
+        element: <BuyerRoute><PaymentCancelled /></BuyerRoute>,
       },
     ],
   },
