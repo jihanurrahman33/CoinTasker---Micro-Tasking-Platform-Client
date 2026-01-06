@@ -123,7 +123,7 @@ const NavBar = () => {
 
                 {/* Developer Link Icon Only for Desktop to save space if needed, or keep full */}
                 <a
-                  href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-nishak53"
+                  href="https://github.com/jihanurrahman33"
                   target="_blank"
                   className="btn btn-square btn-ghost text-base-content/70 hover:text-base-content"
                   title="Developer"
