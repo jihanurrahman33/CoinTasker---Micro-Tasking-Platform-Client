@@ -3,8 +3,10 @@ import { Link, useSearchParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaCheckCircle, FaExclamationTriangle, FaHome, FaSpinner } from "react-icons/fa";
 import { useQueryClient } from "@tanstack/react-query";
+import useAuth from "../../../hooks/useAuth";
 
 const PaymentSuccess = () => {
+    const {user}=useAuth();
     const queryClient = useQueryClient();
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get("session_id");
