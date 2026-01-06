@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
@@ -8,6 +7,7 @@ import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const MyTask = () => {
+  const queryClient = useQueryClient();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedTask, setSelectedTask] = useState(null);
@@ -52,6 +52,10 @@ const MyTask = () => {
                     text: "Your task has been deleted.",
                     icon: "success",
                 });
+              
+                 queryClient.invalidateQueries({
+                queryKey: ["coinBalance", user?.email],
+              }); 
                 refetch();
             }
         } catch (error) {

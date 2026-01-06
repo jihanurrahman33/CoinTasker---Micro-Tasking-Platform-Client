@@ -16,6 +16,8 @@ import PurchaseCoin from "../pages/dashboard/Buyer/PurchaseCoin/PurchaseCoin";
 import PaymentHistory from "../pages/dashboard/Buyer/PaymentHistory/PaymentHistory";
 import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
 import ManageTasks from "../pages/dashboard/Admin/ManageTasks/ManageTasks";
+import PaymentSuccess from "../pages/dashboard/PaymentSuccess/PaymentSuccess";
+import PaymentCancelled from "../pages/dashboard/PaymentSuccess/PaymentCancelled";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +96,14 @@ export const router = createBrowserRouter([
       {
         path: "manage-tasks",
         element: <ManageTasks />,
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "payment-cancelled",
+        element: <PaymentCancelled />,
       },
     ],
   },
