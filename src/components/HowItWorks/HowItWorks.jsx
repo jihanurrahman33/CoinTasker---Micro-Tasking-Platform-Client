@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { FaUserPlus, FaBriefcase, FaCheckCircle, FaCoins, FaArrowRight } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const steps = [
   {
@@ -35,6 +36,7 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const {user}=useAuth();
   const [visibleSteps, setVisibleSteps] = useState([false, false, false, false]);
   const sectionRef = useRef(null);
 
@@ -153,7 +155,7 @@ const HowItWorks = () => {
         {/* CTA button */}
         <div className="text-center mt-16 animate-fade-in-up" style={{ animationDelay: '800ms' }}>
           <Link
-            to="/register"
+            to={user?`/dashboard`:`/register`}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             Get Started Now

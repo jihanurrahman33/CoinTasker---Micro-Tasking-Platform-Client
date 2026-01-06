@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FaTrophy, FaChartLine, FaAward, FaCoins } from "react-icons/fa";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const BestWorkers = () => {
+  const {user} = useAuth();
   const [isVisible, setIsVisible] = useState(false);
   const axiosInstance = useAxios();
 
@@ -149,9 +152,9 @@ const BestWorkers = () => {
           }`}
         >
           <p className="text-gray-600 mb-4">Want to join our top earners? Start completing tasks today!</p>
-          <button className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Link to={user?`/dashboard/task-list`:`/register`} className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             Start Earning Now
-          </button>
+          </Link>
         </div>
       </div>
     </section>

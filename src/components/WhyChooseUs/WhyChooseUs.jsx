@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaShieldAlt, FaBolt, FaUserCheck, FaBell, FaMobileAlt, FaLock } from "react-icons/fa";
+import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const benefits = [
   {
@@ -41,6 +43,7 @@ const benefits = [
 ];
 
 const WhyChooseUs = () => {
+  const {user}=useAuth();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -132,9 +135,9 @@ const WhyChooseUs = () => {
           }`}
         >
           <p className="text-gray-700 text-lg mb-6">Join thousands of satisfied users today</p>
-          <button className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
+          <Link to={user?`/dashboard`:`/register`} className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
             Get Started Now
-          </button>
+          </Link>
         </div>
       </div>
     </section>

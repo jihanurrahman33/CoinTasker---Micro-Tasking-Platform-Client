@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { FaChevronLeft, FaChevronRight, FaCoins, FaUsers, FaBolt, FaChartLine } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
-const slides = [
+
+
+const HeroSection = () => {
+  const {user}=useAuth();
+  const slides = [
   {
     id: 1,
     title: "Earn Money Completing Simple Tasks",
     subtitle: "Join thousands of workers earning coins daily",
     description: "Complete micro-tasks, earn coins, and withdraw your earnings instantly. No experience required.",
     ctaText: "Start Earning Now",
-    ctaLink: "/register",
+    ctaLink: user?"/dashboard/task-list": "/register",
     bgGradient: "from-indigo-600 via-blue-600 to-indigo-700",
     icon: FaCoins,
     stats: [
@@ -25,7 +30,7 @@ const slides = [
     description:
       "Need help with social media engagement, data entry, or content moderation? Post your task and get it done within hours.",
     ctaText: "Post Your First Task",
-    ctaLink: "/register",
+    ctaLink: user?"/dashboard/add-task": "/register",
     bgGradient: "from-purple-600 via-indigo-600 to-blue-600",
     icon: FaBolt,
     stats: [
@@ -41,7 +46,7 @@ const slides = [
     description:
       "Built with security and transparency in mind. Track every transaction, manage your earnings, and grow your income safely.",
     ctaText: "Learn More",
-    ctaLink: "/register",
+    ctaLink: "/about",
     bgGradient: "from-blue-600 via-cyan-600 to-teal-600",
     icon: FaChartLine,
     stats: [
@@ -51,8 +56,6 @@ const slides = [
     ],
   },
 ];
-
-const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
