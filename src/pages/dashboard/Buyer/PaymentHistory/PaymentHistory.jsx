@@ -73,18 +73,18 @@ const PaymentHistory = () => {
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 text-indigo-600 font-bold">
                                                  <FaCoins className="text-yellow-500" />
-                                                 {payment.coin_amount} Coins
+                                                 {payment.coinAmount} Coins
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                <FaDollarSign className="mr-1 text-xs" /> {payment.amount_paid}
+                                                <FaDollarSign className="mr-1 text-xs" /> {payment.amount}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                            <div className="flex items-center justify-end gap-2 text-sm text-gray-500">
                                                 <FaCalendarAlt className="text-gray-400" />
-                                                {new Date(payment.createdAt).toLocaleDateString()}
+                                                {new Date(payment.paidAt).toLocaleDateString()}
                                            </div>
                                         </td>
                                     </tr>
