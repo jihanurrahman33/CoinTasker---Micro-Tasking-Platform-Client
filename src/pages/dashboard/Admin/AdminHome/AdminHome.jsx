@@ -15,13 +15,14 @@ import {
 } from "react-icons/fa";
 
 const AdminHome = () => {
+ 
   const axiosSecure = useAxiosSecure();
   const [selectedWithdrawal, setSelectedWithdrawal] = useState(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Fetch Admin Stats
-  const { data: stats = { totalWorkers: 0, totalBuyers: 0, totalAvailableCoins: 0, totalPayments: 0 }, isLoading: statsLoading } = useQuery({
+  const { data: stats = { totalWorkers: 0, totalBuyers: 0, totalAvailableCoins: 0, totalPayments: 0 }, isLoading: statsLoading ,refetch: refetchStats} = useQuery({
     queryKey: ["adminStats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin-stats");
@@ -49,6 +50,7 @@ const AdminHome = () => {
         const res = await axiosSecure.patch(`/withdrawals/${withdrawalId}`, { status: "approved" });
         if (res.data.modifiedCount > 0) {
             refetchWithdrawals();
+            refetchStats();
             Swal.fire({
                 position: "center",
                 icon: "success",

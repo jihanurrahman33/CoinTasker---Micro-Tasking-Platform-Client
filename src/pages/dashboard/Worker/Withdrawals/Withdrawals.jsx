@@ -14,11 +14,12 @@ import {
   FaMoneyCheckAlt
 } from "react-icons/fa";
 import { Link } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Withdrawals = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  
+  const queryClient = useQueryClient();
   const [coinsToWithdraw, setCoinsToWithdraw] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState(0);
   const [paymentSystem, setPaymentSystem] = useState("");
@@ -99,6 +100,12 @@ const Withdrawals = () => {
     try {
         const res = await axiosSecure.post("/withdrawals", withdrawalData);
         if (res.data.insertedId) {
+          queryClient.invalidateQueries({
+            queryKey: ["workerStatsForWithdrawal", user?.email],
+          }); 
+          queryClient.invalidateQueries({
+            queryKey: ["coinBalance", user?.email],
+          }); 
             setShowSuccess(true);
             setCoinsToWithdraw("");
             setPaymentSystem("");
