@@ -9,8 +9,10 @@ import { updateProfile } from "firebase/auth";
 import { auth } from "../../../firebase/firebase.init";
 import useAxios from "../../../hooks/useAxios";
 import Logo from "../../../components/shared/Logo/Logo";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Register = () => {
+    const queryClient = useQueryClient();
   const { loading, setLoading, createUser } = useAuth();
   const axiosInstance = useAxios();
   const {
@@ -63,6 +65,9 @@ const Register = () => {
         await axiosInstance.post("/users", userInfo);
         
         toast.success("Registration successful!");
+        queryClient.invalidateQueries({
+            queryKey: ["coinBalance"],
+          }); 
         navigate("/");
       }
     } catch (err) {
