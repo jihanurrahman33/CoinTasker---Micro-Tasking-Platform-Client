@@ -177,7 +177,7 @@ const DashboardLayout = () => {
         </nav>
 
         {/* Page Content Outlet */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden">
+        <main className="flex-1 overflow-x-hidden">
              <div className="mx-auto max-w-7xl animate-fade-in-up">
                  <Outlet />
              </div>
