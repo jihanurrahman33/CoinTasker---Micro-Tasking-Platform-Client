@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaCheckCircle, FaExclamationTriangle, FaHome, FaSpinner } from "react-icons/fa";
+import { useQueryClient } from "@tanstack/react-query";
 
 const PaymentSuccess = () => {
+    const queryClient = useQueryClient();
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get("session_id");
     const axiosSecure = useAxiosSecure();
@@ -22,6 +24,9 @@ const PaymentSuccess = () => {
                 if (res.data.success) {
                     setPaymentData(res.data);
                     setStatus("success");
+                    queryClient.invalidateQueries({
+                        queryKey: ["coinBalance", user?.email],
+                      }); 
                 } else {
                     setStatus("error");
                 }
