@@ -68,7 +68,7 @@ const Register = () => {
         queryClient.invalidateQueries({
             queryKey: ["coinBalance"],
           }); 
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (err) {
       console.error(err);
