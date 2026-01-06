@@ -33,10 +33,7 @@ const AdminHome = () => {
   const { data: withdrawals = [], isLoading: withdrawalsLoading, refetch: refetchWithdrawals } = useQuery({
     queryKey: ["pendingWithdrawals"],
     queryFn: async () => {
-      // Assuming endpoint for pending withdrawals is /withdrawals/pending or similar. 
-      // If it returns all, filter on frontend. Let's assume specific endpoint or query param.
-      // Based on typical REST:
-      const res = await axiosSecure.get("/withdrawals/pending"); 
+      const res = await axiosSecure.get("/withdrawals?status=pending"); 
       return res.data;
     },
   });
