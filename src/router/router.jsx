@@ -7,6 +7,7 @@ import PublicRoute from "./PublicRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/dashboard/home/DashboardHome";
 import Tasklist from "../pages/dashboard/Worker/Tasklist/Tasklist";
+import TaskDetails from "../pages/dashboard/Worker/TaskDetails/TaskDetails";
 import MySubmissions from "../pages/dashboard/Worker/MySubmissions/MySubmissions";
 import Withdrawals from "../pages/dashboard/Worker/Withdrawals/Withdrawals";
 import AddTask from "../pages/dashboard/Buyer/AddTask/AddTask";
@@ -56,7 +57,10 @@ export const router = createBrowserRouter([
         path: "task-list",
         element: <Tasklist />,
       },
-
+      {
+        path: "task-list/:id",
+        element: <TaskDetails />,
+      },
       {
         path: "my-submissions",
         element: <MySubmissions />,

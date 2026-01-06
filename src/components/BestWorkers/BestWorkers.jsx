@@ -1,53 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { FaTrophy, FaChartLine, FaAward, FaCoins } from "react-icons/fa";
-
-const topWorkers = [
-  {
-    id: 1,
-    name: "Sarah Mitchell",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
-    coins: 8750,
-    tasksCompleted: 342,
-  },
-  {
-    id: 2,
-    name: "David Chen",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    coins: 7890,
-    tasksCompleted: 298,
-  },
-  {
-    id: 3,
-    name: "Emma Rodriguez",
-    image: "https://randomuser.me/api/portraits/women/68.jpg",
-    coins: 7245,
-    tasksCompleted: 276,
-  },
-  {
-    id: 4,
-    name: "James Wilson",
-    image: "https://randomuser.me/api/portraits/men/86.jpg",
-    coins: 6820,
-    tasksCompleted: 254,
-  },
-  {
-    id: 5,
-    name: "Olivia Taylor",
-    image: "https://randomuser.me/api/portraits/women/24.jpg",
-    coins: 6150,
-    tasksCompleted: 229,
-  },
-  {
-    id: 6,
-    name: "Michael Brown",
-    image: "https://randomuser.me/api/portraits/men/65.jpg",
-    coins: 5980,
-    tasksCompleted: 218,
-  },
-];
+import useAxios from "../../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const BestWorkers = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const axiosInstance = useAxios();
+
+  const { data: topWorkers = [] } = useQuery({
+    queryKey: ["bestWorkers"],
+    queryFn: async () => {
+      const res = await axiosInstance.get("/workers/top");
+      return res.data;
+    },
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -136,7 +102,7 @@ const BestWorkers = () => {
                 <div className="relative mb-4">
                   <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:border-indigo-300 transition-colors duration-300">
                     <img
-                      src={worker.image}
+                      src={worker.photoURL}
                       alt={worker.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -150,7 +116,7 @@ const BestWorkers = () => {
                 {/* Worker Info */}
                 <div className="text-center mb-4">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">{worker.name}</h3>
-                  <p className="text-sm text-gray-500">{worker.tasksCompleted} Tasks Completed</p>
+                  <p className="text-sm text-gray-500">{worker.task_completed} Tasks Completed</p>
                 </div>
 
                 {/* Coins Display */}
@@ -160,7 +126,7 @@ const BestWorkers = () => {
                         <FaCoins className="w-4 h-4 text-white" />
                     </div>
                     <span className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                      {worker.coins.toLocaleString()}
+                      {worker?.coin?.toLocaleString()}
                     </span>
                   </div>
                   <p className="text-xs text-gray-600 text-center uppercase tracking-wider font-semibold">Total Earnings</p>

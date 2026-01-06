@@ -57,7 +57,7 @@ const Register = () => {
             email: data.email,
             photoURL: data.photoURL,
             role: data.role,
-            coins: data.role === "worker" ? 10 : 50,
+            
         };
 
         await axiosInstance.post("/users", userInfo);
