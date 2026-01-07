@@ -92,8 +92,7 @@ const Register = () => {
       <div className="w-full max-w-lg relative z-10 animate-fade-in-up">
         {/* Header */}
          <div className="text-center mb-8">
-            
-            <h1 className="text-3xl font-heading font-bold text-slate-900 mb-2">Create Account</h1>
+            <h1 className="text-4xl font-heading font-bold text-secondary mb-2">Create Account</h1>
             <p className="text-slate-500">Start earning or managing tasks today</p>
         </div>
 
@@ -101,7 +100,7 @@ const Register = () => {
         <div className="card glass-panel p-1">
             <div className="card-body p-8 space-y-4">
                  
-                 <h2 className="text-2xl font-bold text-center text-slate-900 mb-2">Register</h2>
+                 <h2 className="text-2xl font-bold text-center text-secondary mb-2">Register</h2>
 
                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     
@@ -233,7 +232,7 @@ const Register = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="btn btn-primary w-full h-12 text-base font-semibold rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 border-none bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white mt-2 transform hover:-translate-y-0.5 transition-all duration-300"
+                        className="btn btn-primary-gradient w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-primary/40 border-none mt-2 transform hover:-translate-y-0.5 transition-all duration-300"
                     >
                         {loading ? <FaSpinner className="animate-spin mr-2" /> : "Create Account"}
                     </button>

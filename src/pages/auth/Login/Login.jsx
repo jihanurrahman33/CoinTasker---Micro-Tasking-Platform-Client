@@ -48,7 +48,7 @@ const Login = () => {
       <div className="w-full max-w-md relative z-10 animate-fade-in-up">
         {/* Header */}
         <div className="text-center mb-8">
-            <h1 className="text-3xl font-heading font-bold text-slate-900 mb-2">Welcome Back</h1>
+            <h1 className="text-4xl font-heading font-bold text-secondary mb-2">Welcome Back</h1>
             <p className="text-slate-500">Sign in to your account to continue</p>
         </div>
 
@@ -56,7 +56,7 @@ const Login = () => {
         <div className="card glass-panel p-1">
             <div className="card-body p-8 space-y-6">
                 
-                <h2 className="text-2xl font-bold text-center text-slate-900">Sign In</h2>
+                <h2 className="text-2xl font-bold text-center text-secondary">Sign In</h2>
                 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     {/* Email Input */}
@@ -125,7 +125,7 @@ const Login = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="btn btn-primary w-full h-12 text-base font-semibold rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 border-none bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white transform hover:-translate-y-0.5 transition-all duration-300"
+                        className="btn btn-primary-gradient w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-primary/40 border-none transform hover:-translate-y-0.5 transition-all duration-300"
                     >
                         {loading ? <FaSpinner className="animate-spin mr-2" /> : "Sign In"}
                     </button>
