@@ -13,7 +13,8 @@ import {
   FaExclamationCircle, 
   FaCalendarAlt, 
   FaSpinner, 
-  FaCheckCircle 
+  FaCheckCircle, 
+  FaUsers
 } from "react-icons/fa";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -158,116 +159,119 @@ const AddTask = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-50/50 to-base-100 py-12 px-4">
+    <div className="min-h-screen bg-slate-50 py-12 px-4 font-sans">
       <div className="container mx-auto max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-base-content mb-2">Create New Task</h1>
-          <p className="text-base-content/60 text-lg">Post a task and hire workers instantly</p>
+        <div className="text-center mb-10 animate-fade-in-down">
+          <h1 className="text-4xl font-bold font-heading text-secondary mb-2">Create New Task</h1>
+          <p className="text-slate-500 text-lg">Post a task and hire workers instantly</p>
         </div>
 
         {/* Main Form Card */}
-        <div className="card bg-base-100 shadow-xl border border-base-200">
-          <div className="card-body p-8 space-y-6">
+        <div className="card glass-panel shadow-2xl overflow-hidden animate-fade-in-up">
+          <div className="card-body p-8 space-y-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               
               {/* Task Title */}
               <div className="form-control w-full space-y-2">
-                <label className="label-text text-base font-semibold">
-                  Task Title <span className="text-error">*</span>
+                <label className="label-text text-base font-semibold text-secondary">
+                  Task Title <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Watch my YouTube video and leave a comment"
-                  className={`input input-bordered w-full h-12 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 ${errors.task_title ? "input-error" : ""}`}
+                  className={`input input-bordered w-full h-12 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white/50 ${errors.task_title ? "input-error bg-red-50" : "border-slate-300"}`}
                   {...register("task_title", { required: "Task title is required" })}
                 />
-                {errors.task_title && <p className="text-sm text-error mt-1">{errors.task_title.message}</p>}
+                {errors.task_title && <p className="text-sm text-red-500 mt-1 flex items-center gap-1"><FaExclamationCircle/> {errors.task_title.message}</p>}
               </div>
 
               {/* Task Detail */}
               <div className="form-control w-full space-y-2">
-                <label className="label-text text-base font-semibold">
-                  Task Detail <span className="text-error">*</span>
+                <label className="label-text text-base font-semibold text-secondary">
+                  Task Detail <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   placeholder="Explain the task step-by-step…"
                   rows={5}
-                  className={`textarea textarea-bordered w-full text-base rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none ${errors.task_detail ? "textarea-error" : ""}`}
+                  className={`textarea textarea-bordered w-full text-base rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none bg-white/50 ${errors.task_detail ? "textarea-error bg-red-50" : "border-slate-300"}`}
                   {...register("task_detail", { required: "Task detail is required" })}
                 ></textarea>
-                {errors.task_detail && <p className="text-sm text-error mt-1">{errors.task_detail.message}</p>}
+                {errors.task_detail && <p className="text-sm text-red-500 mt-1 flex items-center gap-1"><FaExclamationCircle/> {errors.task_detail.message}</p>}
               </div>
 
               {/* Required Workers & Payable Amount - Grid */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="form-control w-full space-y-2">
-                  <label className="label-text text-base font-semibold">
-                    Required Workers <span className="text-error">*</span>
+                  <label className="label-text text-base font-semibold text-secondary">
+                    Required Workers <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="number"
-                    placeholder="100"
-                    className={`input input-bordered w-full h-12 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 ${errors.required_workers ? "input-error" : ""}`}
-                    {...register("required_workers", { required: "Required workers must be greater than 0", min: { value: 1, message: "Min 1 worker" } })}
-                  />
-                  {errors.required_workers && <p className="text-sm text-error mt-1">{errors.required_workers.message}</p>}
+                  <div className="relative">
+                      <FaUsers className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <input
+                        type="number"
+                        placeholder="100"
+                        className={`input input-bordered w-full h-12 pl-10 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white/50 ${errors.required_workers ? "input-error bg-red-50" : "border-slate-300"}`}
+                        {...register("required_workers", { required: "Required workers must be greater than 0", min: { value: 1, message: "Min 1 worker" } })}
+                      />
+                  </div>
+                  {errors.required_workers && <p className="text-sm text-red-500 mt-1 flex items-center gap-1"><FaExclamationCircle/> {errors.required_workers.message}</p>}
                 </div>
 
                 <div className="form-control w-full space-y-2">
-                  <label className="label-text text-base font-semibold">
-                    Payable Amount (per worker) <span className="text-error">*</span>
+                  <label className="label-text text-base font-semibold text-secondary">
+                    Payable Amount (per worker) <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-warning pointer-events-none">
-                        <FaCoins className="size-5" />
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500 pointer-events-none">
+                        <FaCoins className="size-4" />
                     </div>
                     <input
                       type="number"
                       placeholder="10"
-                      className={`input input-bordered w-full h-12 pl-10 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 ${errors.payable_amount ? "input-error" : ""}`}
+                      className={`input input-bordered w-full h-12 pl-10 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white/50 ${errors.payable_amount ? "input-error bg-red-50" : "border-slate-300"}`}
                       {...register("payable_amount", { required: "Payable amount must be greater than 0", min: { value: 1, message: "Min 1 coin" } })}
                     />
                   </div>
-                  {errors.payable_amount && <p className="text-sm text-error mt-1">{errors.payable_amount.message}</p>}
+                  {errors.payable_amount && <p className="text-sm text-red-500 mt-1 flex items-center gap-1"><FaExclamationCircle/> {errors.payable_amount.message}</p>}
                 </div>
               </div>
 
               {/* Deadline */}
               <div className="form-control w-full space-y-2">
-                <label className="label-text text-base font-semibold">
-                  Completion Deadline <span className="text-error">*</span>
+                <label className="label-text text-base font-semibold text-secondary">
+                  Completion Deadline <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-indigo-500 pointer-events-none">
-                        <FaCalendarAlt className="size-5" />
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none">
+                        <FaCalendarAlt className="size-4" />
                     </div>
                     <input
                         type="date"
-                        className={`input input-bordered w-full h-12 pl-10 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 ${errors.completion_date ? "input-error" : ""}`}
+                        className={`input input-bordered w-full h-12 pl-10 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-white/50 ${errors.completion_date ? "input-error bg-red-50" : "border-slate-300"}`}
                         {...register("completion_date", { required: "Deadline is required" })}
                     />
                 </div>
-                {errors.completion_date && <p className="text-sm text-error mt-1">{errors.completion_date.message}</p>}
+                {errors.completion_date && <p className="text-sm text-red-500 mt-1 flex items-center gap-1"><FaExclamationCircle/> {errors.completion_date.message}</p>}
               </div>
 
               {/* Submission Information */}
               <div className="form-control w-full space-y-2">
-                <label className="label-text text-base font-semibold">
-                  Submission Information <span className="text-error">*</span>
+                <label className="label-text text-base font-semibold text-secondary">
+                  Submission Information <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   placeholder="Upload screenshot / link / proof"
                   rows={3}
-                  className={`textarea textarea-bordered w-full text-base rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none ${errors.submission_info ? "textarea-error" : ""}`}
+                  className={`textarea textarea-bordered w-full text-base rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none bg-white/50 ${errors.submission_info ? "textarea-error bg-red-50" : "border-slate-300"}`}
                   {...register("submission_info", { required: "Submission info is required" })}
                 ></textarea>
-                {errors.submission_info && <p className="text-sm text-error mt-1">{errors.submission_info.message}</p>}
+                {errors.submission_info && <p className="text-sm text-red-500 mt-1 flex items-center gap-1"><FaExclamationCircle/> {errors.submission_info.message}</p>}
               </div>
 
               {/* Image Upload */}
               <div className="form-control w-full space-y-2">
-                <label className="label-text text-base font-semibold">
+                <label className="label-text text-base font-semibold text-secondary">
                   Task Image Upload
                 </label>
 
@@ -276,19 +280,19 @@ const AddTask = () => {
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
-                    className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${
+                    className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer bg-slate-50/50 ${
                       isDragging
-                        ? "border-indigo-500 bg-indigo-50"
-                        : "border-base-300 hover:border-indigo-400 hover:bg-base-200"
+                        ? "border-primary bg-primary/5"
+                        : "border-slate-300 hover:border-primary hover:bg-slate-50"
                     }`}
                   >
                     <label htmlFor="file-upload" className="cursor-pointer w-full h-full block">
-                        <FaCloudUploadAlt className="mx-auto size-12 text-base-content/40 mb-3" />
-                        <p className="text-base text-base-content/70 mb-2">
+                        <FaCloudUploadAlt className="mx-auto size-12 text-slate-300 mb-3" />
+                        <p className="text-base text-slate-600 mb-2">
                         Drag and drop your image here, or{" "}
-                        <span className="text-indigo-600 font-medium hover:underline">browse</span>
+                        <span className="text-primary font-bold hover:underline">browse</span>
                         </p>
-                        <p className="text-sm text-base-content/50">Upload task image (ImageBB supported)</p>
+                        <p className="text-sm text-slate-400">Upload task image (ImageBB supported)</p>
                     </label>
                     <input
                       id="file-upload"
@@ -299,7 +303,7 @@ const AddTask = () => {
                     />
                   </div>
                 ) : (
-                  <div className="relative rounded-xl overflow-hidden border-2 border-base-300 w-full h-64 bg-base-200">
+                  <div className="relative rounded-xl overflow-hidden border border-slate-200 w-full h-64 bg-slate-100 shadow-sm">
                     <img
                       src={imagePreview}
                       alt="Task preview"
@@ -308,46 +312,48 @@ const AddTask = () => {
                     <button
                       type="button"
                       onClick={removeImage}
-                      className="absolute top-2 right-2 p-2 bg-base-100 rounded-full shadow-lg hover:bg-base-200 transition-colors z-10"
+                      className="absolute top-2 right-2 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white text-red-500 transition-colors z-10"
                     >
-                      <FaTimes className="size-4 text-base-content" />
+                      <FaTimes className="size-4" />
                     </button>
                   </div>
                 )}
               </div>
 
               {/* Live Calculation Card */}
-              <div className="card bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-200">
-                <div className="card-body p-5 space-y-3">
-                    <h3 className="text-lg font-semibold text-indigo-900 border-b border-indigo-200 pb-2">Cost Calculation</h3>
+              <div className="card glass-panel bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-lg">
+                <div className="card-body p-6 space-y-4">
+                    <h3 className="text-lg font-bold text-secondary border-b border-slate-100 pb-3">Cost Calculation</h3>
                     
                     <div className="flex justify-between items-center text-base">
-                        <span className="text-base-content/70">Required Workers</span>
-                        <span className="font-semibold text-base-content">{required_workers || 0}</span>
+                        <span className="text-slate-500">Required Workers</span>
+                        <span className="font-semibold text-secondary">{required_workers || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-base">
-                        <span className="text-base-content/70">Payable Amount (per worker)</span>
-                        <span className="font-semibold text-base-content flex items-center gap-1">
-                            <FaCoins className="size-4 text-warning" />
+                        <span className="text-slate-500">Payable Amount (per worker)</span>
+                        <span className="font-semibold text-secondary flex items-center gap-1">
+                            <FaCoins className="size-4 text-amber-500" />
                             {payable_amount || 0}
                         </span>
                     </div>
                     
-                    <div className="divider my-1"></div>
+                    <div className="divider my-0"></div>
 
                     <div className="flex justify-between items-center text-lg">
-                        <span className="font-bold text-indigo-900">Total Payable Coins</span>
-                        <span className="font-bold text-2xl text-indigo-600 flex items-center gap-1">
-                             <FaCoins className="size-6 text-warning" />
+                        <span className="font-bold text-secondary">Total Payable Coins</span>
+                        <span className="font-bold text-2xl text-primary flex items-center gap-1">
+                             <FaCoins className="size-6 text-amber-500" />
                              {total_payable_amount}
                         </span>
                     </div>
 
                     {/* Available Coins Badge */}
-                    <div className={`mt-2 p-3 rounded-lg flex justify-between items-center ${hasInsufficientFunds ? "bg-error/10 text-error" : "bg-success/10 text-success-content"}`}>
-                         <span className="text-sm font-medium">Available Coins</span>
-                         <span className="text-base font-bold flex items-center gap-1">
-                            <FaCoins className="size-4" />
+                    <div className={`mt-2 p-4 rounded-xl flex justify-between items-center border ${hasInsufficientFunds ? "bg-red-50 border-red-100 text-red-700" : "bg-emerald-50 border-emerald-100 text-emerald-700"}`}>
+                         <span className="text-sm font-bold">Available Coins</span>
+                         <span className="text-base font-bold flex items-center gap-2">
+                            <div className={`p-1 rounded-full ${hasInsufficientFunds ? "bg-red-100" : "bg-emerald-100"}`}>
+                                <FaCoins className="size-3" />
+                            </div>
                             {coinBalance}
                          </span>
                     </div>
@@ -356,13 +362,13 @@ const AddTask = () => {
 
               {/* Insufficient Funds Alert */}
               {hasInsufficientFunds && total_payable_amount > 0 && (
-                 <div role="alert" className="alert alert-error bg-error/10 border-error/20 text-error-content">
-                    <FaExclamationCircle className="size-5" />
+                 <div role="alert" className="alert alert-error bg-red-50 border border-red-200 text-red-800 shadow-sm">
+                    <FaExclamationCircle className="size-5 text-red-500" />
                     <div className="ml-2">
                         <h3 className="font-bold">Insufficient Balance</h3>
-                        <div className="text-xs">You need {total_payable_amount - coinBalance} more coins to publish this.</div>
+                        <div className="text-xs text-red-600">You need <span className="font-bold">{total_payable_amount - coinBalance} more coins</span> to publish this task.</div>
                     </div>
-                     <button type="button" onClick={() => navigate("/dashboard/purchase-coin")} className="btn btn-sm btn-error text-white">Purchase Coin</button>
+                     <button type="button" onClick={() => navigate("/dashboard/purchase-coin")} className="btn btn-sm bg-red-600 border-none text-white hover:bg-red-700">Purchase Coin</button>
                 </div>
               )}
 
@@ -370,7 +376,7 @@ const AddTask = () => {
               <button
                 type="submit"
                 disabled={isSubmitting || hasInsufficientFunds}
-                className="btn btn-primary w-full h-14 text-lg font-semibold rounded-xl"
+                className="btn btn-primary-gradient w-full h-14 text-lg font-bold rounded-xl shadow-lg shadow-primary/20 transform hover:-translate-y-0.5 transition-all text-white border-none disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

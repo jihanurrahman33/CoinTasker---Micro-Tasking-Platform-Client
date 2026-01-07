@@ -115,125 +115,135 @@ const BuyerHome = () => {
 
   if (statsLoading || submissionsLoading) {
     return (
-        <div className="flex justify-center items-center min-h-screen">
-          <FaSpinner className="animate-spin text-4xl text-indigo-600" />
+        <div className="flex justify-center items-center min-h-screen bg-slate-50">
+          <FaSpinner className="animate-spin text-4xl text-primary" />
         </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header */}
         <div className="space-y-2 animate-fade-in-down">
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl font-bold font-heading text-secondary">
             Buyer Dashboard
           </h1>
-          <p className="text-gray-500 text-lg">Manage your tasks and review worker submissions</p>
+          <p className="text-slate-500 text-lg">Manage your tasks and review worker submissions</p>
         </div>
 
         {/* Statistics Cards */}
         <div className="grid gap-6 md:grid-cols-3">
           {/* Total Tasks */}
-          <div className="bg-white p-6 rounded-2xl shadow-lg border border-indigo-50 hover:shadow-xl transition-shadow group relative overflow-hidden">
-             <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-5" />
+          <div className="card glass-panel p-6 hover:shadow-xl transition-shadow group relative overflow-hidden bg-gradient-to-br from-white to-slate-50 border-slate-100">
+             <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-primary/10 to-emerald-500/10 opacity-50" />
              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl shadow-md text-white">
+                <div className="p-3 bg-gradient-to-br from-primary to-emerald-600 rounded-xl shadow-lg text-white">
                     <FaFileAlt size={24} />
                 </div>
              </div>
              <div>
-                <p className="text-sm font-medium text-gray-500">Total Tasks Posted</p>
-                <p className="text-3xl font-bold text-indigo-600">{stats.totalTasks}</p>
+                <p className="text-sm font-medium text-slate-500">Total Tasks Posted</p>
+                <p className="text-3xl font-bold text-secondary group-hover:text-primary transition-colors">{stats.totalTasks}</p>
              </div>
           </div>
 
           {/* Pending Workers */}
-          <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-50 hover:shadow-xl transition-shadow group relative overflow-hidden">
-             <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-purple-500 to-purple-600 opacity-5" />
+          <div className="card glass-panel p-6 hover:shadow-xl transition-shadow group relative overflow-hidden bg-gradient-to-br from-white to-amber-50 border-amber-100">
+             <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-amber-500/10 to-orange-600/10 opacity-50" />
              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-md text-white">
+                <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl shadow-lg text-white">
                     <FaUsers size={24} />
                 </div>
-                <FaClock className="text-amber-500" size={20}/>
+                <FaClock className="text-amber-500/50" size={24}/>
              </div>
              <div>
-                <p className="text-sm font-medium text-gray-500">Pending Workers</p>
-                <p className="text-3xl font-bold text-purple-600">{stats.pendingTasks}</p>
+                <p className="text-sm font-medium text-amber-700/70">Pending Workers</p>
+                <p className="text-3xl font-bold text-amber-700">{stats.pendingTasks}</p>
              </div>
           </div>
 
           {/* Total Payments */}
-          <div className="bg-white p-6 rounded-2xl shadow-lg border border-green-50 hover:shadow-xl transition-shadow group relative overflow-hidden">
-             <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-green-500 to-green-600 opacity-5" />
+          <div className="card glass-panel p-6 hover:shadow-xl transition-shadow group relative overflow-hidden bg-gradient-to-br from-white to-blue-50 border-blue-100">
+             <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-blue-500/10 to-cyan-600/10 opacity-50" />
              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-md text-white">
+                <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl shadow-lg text-white">
                     <FaDollarSign size={24} />
                 </div>
              </div>
              <div>
-                <p className="text-sm font-medium text-gray-500">Total Payments</p>
-                <p className="text-3xl font-bold text-green-600">{stats.totalPaymentPaid} <span className="text-sm font-normal text-gray-400">coins</span></p>
+                <p className="text-sm font-medium text-blue-700/70">Total Payments</p>
+                <p className="text-3xl font-bold text-blue-700">{stats.totalPaymentPaid} <span className="text-sm font-normal text-blue-400">coins</span></p>
              </div>
           </div>
         </div>
 
         {/* Task to Review Section */}
-        <div className="bg-white rounded-2xl shadow-lg border border-indigo-50 overflow-hidden">
-          <div className="p-6 border-b border-indigo-50 bg-indigo-50/30">
-            <h2 className="text-2xl font-bold text-indigo-900">Tasks to Review</h2>
-            <p className="text-sm text-indigo-600 flex items-center gap-2 mt-1">
-               <span className="inline-block w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-               {submissions.length} pending submissions require your attention
-            </p>
+        <div className="card glass-panel overflow-hidden">
+          <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+            <div>
+                <h2 className="text-xl font-bold text-secondary">Tasks to Review</h2>
+                <p className="text-sm text-slate-500 mt-1">
+                 Pending submissions requiring approval
+                </p>
+            </div>
+             {submissions.length > 0 && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    {submissions.length} Pending
+                </span>
+             )}
           </div>
 
-          <div className="p-6">
+          <div className="p-0">
             {submissions.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="bg-indigo-50 p-4 rounded-full mb-4">
-                    <FaCheckCircle className="text-4xl text-indigo-400" />
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="bg-slate-50 p-6 rounded-full mb-4 border border-slate-100 shadow-sm">
+                    <FaCheckCircle className="text-5xl text-emerald-300" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">All caught up!</h3>
-                <p className="text-gray-500">No pending submissions to review at the moment</p>
+                <h3 className="text-xl font-bold text-secondary mb-2">All caught up!</h3>
+                <p className="text-slate-500 max-w-sm">No pending submissions to review at the moment. Great job submitting tasks!</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50/50">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Worker</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Task Title</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Payable Amount</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Date</th>
-                      <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900">Action</th>
+                <table className="table w-full">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-100 text-xs uppercase text-slate-500 font-semibold tracking-wider">
+                      <th className="px-6 py-4">Worker</th>
+                      <th className="px-6 py-4">Task Title</th>
+                      <th className="px-6 py-4">Payable Amount</th>
+                      <th className="px-6 py-4">Date</th>
+                      <th className="px-6 py-4 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-slate-50">
                     {submissions.map((submission) => (
-                      <tr key={submission._id} className="group hover:bg-gray-50 transition-colors">
+                      <tr key={submission._id} className="group hover:bg-slate-50/50 transition-colors">
                         <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm shadow-md ring-2 ring-white">
                                     {submission.worker_name?.charAt(0).toUpperCase()}
                                 </div>
                                 <div>
-                                    <p className="font-medium text-gray-900">{submission.worker_name}</p>
-                                    <p className="text-xs text-gray-500">{submission.worker_email}</p>
+                                    <p className="font-semibold text-secondary">{submission.worker_name}</p>
+                                    <p className="text-xs text-slate-500">{submission.worker_email}</p>
                                 </div>
                             </div>
                         </td>
                         <td className="px-6 py-4">
-                             <p className="font-medium text-gray-700">{submission.task_title}</p>
+                             <p className="font-medium text-slate-700 group-hover:text-primary transition-colors">{submission.task_title}</p>
                         </td>
                         <td className="px-6 py-4">
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                {submission.payable_amount} coins
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-100">
+                                <FaDollarSign className="text-[10px]" /> {submission.payable_amount}
                             </span>
                         </td>
                          <td className="px-6 py-4">
-                            <div className="flex items-center gap-2 text-sm text-gray-500">
-                                <FaCalendarAlt className="text-gray-400"/>
+                            <div className="flex items-center gap-2 text-sm text-slate-500">
+                                <FaCalendarAlt className="text-slate-300"/>
                                 {new Date(submission.current_date).toLocaleDateString()}
                             </div>
                         </td>
@@ -244,9 +254,9 @@ const BuyerHome = () => {
                                  console.log("View Submission Clicked", submission);
                                  handleViewSubmission(submission);
                              }}
-                             className="inline-flex items-center px-3 py-1.5 border border-indigo-200 text-xs font-medium rounded-lg text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none transition-colors"
+                             className="btn btn-sm btn-ghost text-primary hover:bg-primary/10"
                            >
-                              <FaEye className="mr-1.5 h-3 w-3" /> View Submission
+                              <FaEye className="mr-1.5 h-3 w-3" /> View
                            </button>
                         </td>
                       </tr>
@@ -261,74 +271,74 @@ const BuyerHome = () => {
       </div>
 
         {isModalOpen && selectedSubmission && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm transition-opacity" onClick={handleCloseModal}>
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={handleCloseModal}>
             <div 
-                className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden transform transition-all scale-100 opacity-100"
+                className="card glass-panel w-full max-w-lg overflow-hidden transform transition-all scale-100 opacity-100 shadow-2xl ring-1 ring-slate-900/5"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div className="flex items-start justify-between mb-4">
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-6">
                      <div>
-                        <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        <h3 className="text-xl font-bold font-heading text-secondary">
                             Submission Details
                         </h3>
-                        <p className="text-sm text-gray-500 mt-1">Review the work submitted by the worker.</p>
+                        <p className="text-sm text-slate-500 mt-1">Review the work submitted by the worker.</p>
                      </div>
                      <button 
                         type="button" 
                         onClick={handleCloseModal} 
-                        className="text-gray-400 hover:text-gray-500 transition-colors bg-transparent p-2 rounded-full hover:bg-gray-100"
+                        className="btn btn-circle btn-sm btn-ghost text-slate-400 hover:text-secondary"
                      >
-                        <FaTimes size={20} />
+                        <FaTimes />
                      </button>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                      {/* Worker */}
-                    <div className="flex items-center gap-3 p-3 bg-indigo-50 rounded-xl border border-indigo-100">
-                        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                    <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg shadow-md shrink-0">
                             {selectedSubmission.worker_name?.charAt(0).toUpperCase()}
                         </div>
-                        <div>
-                            <p className="font-bold text-gray-900">{selectedSubmission.worker_name}</p>
-                            <p className="text-sm text-gray-500">{selectedSubmission.worker_email}</p>
+                        <div className="min-w-0">
+                            <p className="font-bold text-secondary truncate">{selectedSubmission.worker_name}</p>
+                            <p className="text-sm text-slate-500 truncate">{selectedSubmission.worker_email}</p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Task Title</p>
-                            <p className="text-sm font-medium text-gray-900 mt-1">{selectedSubmission.task_title}</p>
+                        <div className="p-3 rounded-lg border border-slate-100 bg-white">
+                            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Task Title</p>
+                            <p className="text-sm font-semibold text-secondary mt-1 line-clamp-2">{selectedSubmission.task_title}</p>
                         </div>
-                        <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase">Payable Amount</p>
-                            <p className="text-sm font-bold text-green-600 mt-1">{selectedSubmission.payable_amount} Coins</p>
+                        <div className="p-3 rounded-lg border border-amber-100 bg-amber-50/50">
+                            <p className="text-xs font-bold text-amber-500 uppercase tracking-wider">Payable Amount</p>
+                            <p className="text-lg font-bold text-amber-700 mt-0.5">{selectedSubmission.payable_amount} <span className="text-xs font-normal text-amber-600">Coins</span></p>
                         </div>
                     </div>
 
                     <div>
-                         <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Submission Proof</p>
-                         <div className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 leading-relaxed max-h-40 overflow-y-auto whitespace-pre-wrap">
+                         <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Submission Proof</p>
+                         <div className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 leading-relaxed max-h-48 overflow-y-auto whitespace-pre-wrap font-mono">
                             {selectedSubmission.submission_details}
                          </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                <div className="bg-slate-50/50 px-6 py-4 border-t border-slate-100 flex flex-col sm:flex-row-reverse gap-3">
                   <button
                     type="button"
                     disabled={isProcessing}
                     onClick={handleApprove}
-                    className="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-3 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed items-center gap-2"
+                    className="btn btn-primary-gradient border-none text-white shadow-lg shadow-primary/20 flex-1"
                   >
-                    {isProcessing ? <FaSpinner className="animate-spin"/> : <FaCheckCircle />} Approve
+                    {isProcessing ? <FaSpinner className="animate-spin"/> : <FaCheckCircle />} Approve Submission
                   </button>
                   <button
                     type="button"
                     disabled={isProcessing}
                     onClick={handleReject}
-                    className="mt-3 w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-3 bg-red-100 text-base font-medium text-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed items-center gap-2"
+                    className="btn bg-red-50 text-red-600 hover:bg-red-100 border-red-200 hover:border-red-300 flex-1"
                   >
                      {isProcessing ? <FaSpinner className="animate-spin"/> : <FaTimesCircle />} Reject
                   </button>
@@ -336,7 +346,7 @@ const BuyerHome = () => {
                     type="button"
                     disabled={isProcessing}
                     onClick={handleCloseModal}
-                    className="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-4 py-3 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="btn btn-ghost text-slate-500 hover:bg-slate-100"
                   >
                     Cancel
                   </button>

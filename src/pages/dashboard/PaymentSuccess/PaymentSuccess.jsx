@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaCheckCircle, FaExclamationTriangle, FaHome, FaSpinner } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaHome, FaSpinner, FaCoins } from "react-icons/fa";
 import { useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 
@@ -49,44 +49,47 @@ const PaymentSuccess = () => {
     }, [sessionId, axiosSecure]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full text-center border border-gray-100 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 font-sans">
+            <div className="card glass-panel p-8 max-w-md w-full text-center relative overflow-hidden shadow-2xl">
                  {/* Background decoration */}
-                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 to-emerald-600"></div>
+                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-400 to-primary"></div>
 
                 {status === "loading" && (
                     <div className="py-12 flex flex-col items-center">
-                        <FaSpinner className="text-4xl text-indigo-600 animate-spin mb-4" />
-                        <p className="text-gray-600 font-medium">Verifying your payment...</p>
+                        <FaSpinner className="text-4xl text-primary animate-spin mb-4" />
+                        <p className="text-secondary font-medium">Verifying your payment...</p>
                     </div>
                 )}
 
                 {status === "success" && (
                     <div className="animate-fade-in-up">
-                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-                            <FaCheckCircle className="text-5xl text-green-500" />
+                        <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-emerald-100">
+                            <FaCheckCircle className="text-5xl text-emerald-500" />
                         </div>
-                        <h2 className="text-3xl font-bold text-gray-800 mb-2">Payment Successful!</h2>
-                        <p className="text-gray-500 mb-8">
+                        <h2 className="text-3xl font-bold font-heading text-secondary mb-2">Payment Successful!</h2>
+                        <p className="text-slate-500 mb-8">
                             Thank you for your purchase. Your account has been credited.
                         </p>
 
                          {paymentData && (
-                            <div className="bg-gray-50 rounded-xl p-4 mb-8 border border-gray-100">
-                                <p className="text-sm text-gray-500 mb-1">Transaction ID</p>
-                                <p className="font-mono text-xs text-gray-800 break-all bg-white p-2 rounded border border-gray-200">
+                            <div className="bg-slate-50 rounded-xl p-6 mb-8 border border-slate-100 shadow-inner">
+                                <p className="text-sm text-slate-400 mb-2 uppercase tracking-wide font-semibold">Transaction ID</p>
+                                <p className="font-mono text-xs text-slate-600 break-all bg-white p-3 rounded-lg border border-slate-200 shadow-sm mb-4">
                                     {paymentData.transactionId}
                                 </p>
-                                <div className="mt-4 flex justify-between items-center border-t border-gray-200 pt-3">
-                                    <span className="text-gray-600 font-medium">Coins Added</span>
-                                    <span className="text-xl font-bold text-indigo-600">+{paymentData.coinAdded}</span>
+                                <div className="flex justify-between items-center pt-2 border-t border-slate-200">
+                                    <span className="text-slate-600 font-medium">Coins Added</span>
+                                    <div className="flex items-center gap-2 text-2xl font-bold text-emerald-600">
+                                        <FaCoins className="text-amber-500 text-xl" />
+                                        +{paymentData.coinAdded}
+                                    </div>
                                 </div>
                             </div>
                         )}
 
                         <Link 
                             to="/dashboard" 
-                            className="btn btn-primary w-full shadow-lg shadow-indigo-200 hover:shadow-xl transition-all"
+                            className="btn btn-primary-gradient w-full text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all border-none text-lg h-12"
                         >
                             <FaHome className="mr-2" /> Return to Dashboard
                         </Link>
@@ -95,14 +98,14 @@ const PaymentSuccess = () => {
 
                 {status === "error" && (
                     <div className="animate-fade-in-up">
-                        <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-100">
                             <FaExclamationTriangle className="text-4xl text-red-500" />
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2">Payment Failed</h2>
-                        <p className="text-gray-500 mb-8">
+                        <h2 className="text-2xl font-bold font-heading text-secondary mb-2">Payment Failed</h2>
+                        <p className="text-slate-500 mb-8">
                             We couldn't verify your payment. Please contact support if you believe this is an error.
                         </p>
-                        <Link to="/dashboard/purchase-coin" className="btn btn-outline w-full">
+                        <Link to="/dashboard/purchase-coin" className="btn btn-outline btn-error w-full h-12">
                             Try Again
                         </Link>
                     </div>

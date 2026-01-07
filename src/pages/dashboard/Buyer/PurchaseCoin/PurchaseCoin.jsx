@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCoins, FaShoppingCart } from "react-icons/fa";
+import { FaCoins, FaShoppingCart, FaShieldAlt, FaBolt, FaCheck } from "react-icons/fa";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 
@@ -9,10 +9,10 @@ const PurchaseCoin = () => {
   const [loadingId, setLoadingId] = useState(null);
 
   const purchaseOptions = [
-    { coins: 10, price: 1, id: 1, name: "Starter Pack" },
-    { coins: 150, price: 10, id: 2, name: "Value Pack" },
-    { coins: 500, price: 20, id: 3, name: "Pro Pack" },
-    { coins: 1000, price: 35, id: 4, name: "Elite Pack" },
+    { coins: 10, price: 1, id: 1, name: "Starter Pack", color: "from-slate-400 to-slate-600", badge: "bg-slate-100 text-slate-700" },
+    { coins: 150, price: 10, id: 2, name: "Value Pack", color: "from-emerald-400 to-emerald-600", badge: "bg-emerald-100 text-emerald-700", recommended: true },
+    { coins: 500, price: 20, id: 3, name: "Pro Pack", color: "from-amber-400 to-amber-600", badge: "bg-amber-100 text-amber-700" },
+    { coins: 1000, price: 35, id: 4, name: "Elite Pack", color: "from-primary to-indigo-600", badge: "bg-primary/10 text-primary" },
   ];
 
   const handleBuy = async (option) => {
@@ -41,13 +41,13 @@ const PurchaseCoin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-12 animate-fade-in-down">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl font-bold font-heading text-secondary mb-4">
             Purchase Coins
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
             Boost your account functionality by purchasing coins. Secure payment via Stripe.
           </p>
         </div>
@@ -56,35 +56,41 @@ const PurchaseCoin = () => {
           {purchaseOptions.map((option, index) => (
             <div
               key={option.id}
-              className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-indigo-50 overflow-hidden hover:-translate-y-2"
+              className={`group relative card glass-panel overflow-hidden transition-all duration-500 hover:-translate-y-2 border-slate-200 ${option.recommended ? 'ring-2 ring-emerald-400 shadow-xl scale-105 md:scale-105 z-10' : 'hover:shadow-2xl'}`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-bl-full z-0 transition-transform group-hover:scale-110" />
+             {option.recommended && (
+                 <div className="absolute top-0 inset-x-0 bg-emerald-500 text-white text-xs font-bold text-center py-1 uppercase tracking-wider">
+                     Most Popular
+                 </div>
+             )}
               
-              <div className="p-8 flex flex-col items-center relative z-10 h-full">
-                <div className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 group-hover:from-indigo-100 group-hover:to-purple-100 transition-colors shadow-sm">
-                  <FaCoins className="text-4xl text-indigo-600 group-hover:scale-110 transition-transform duration-300" />
+              <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${option.color} opacity-10 rounded-bl-full z-0 transition-transform group-hover:scale-110`} />
+              
+              <div className={`p-8 flex flex-col items-center relative z-10 h-full ${option.recommended ? 'pt-10' : ''}`}>
+                <div className={`mb-6 p-4 rounded-2xl bg-gradient-to-br ${option.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <FaCoins className="text-3xl" />
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{option.name}</h3>
-                <div className="text-4xl font-black text-gray-900 mb-2 tracking-tight">
-                  <span className="text-2xl align-top text-gray-500 font-medium">$</span>{option.price}
+                <h3 className="text-xl font-bold text-secondary mb-2">{option.name}</h3>
+                <div className="text-4xl font-black text-secondary mb-2 tracking-tight flex items-start">
+                  <span className="text-2xl mt-1 text-slate-400 font-medium">$</span>{option.price}
                 </div>
-                <div className="px-4 py-1.5 bg-indigo-50 rounded-full mb-6">
-                    <span className="font-bold text-indigo-700">{option.coins} Coins</span>
+                <div className={`px-4 py-1.5 rounded-full mb-6 ${option.badge}`}>
+                    <span className="font-bold text-sm">{option.coins} Coins</span>
                 </div>
 
-                <ul className="text-sm text-gray-500 space-y-3 mb-8 w-full">
+                <ul className="text-sm text-slate-500 space-y-3 mb-8 w-full">
                     <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                        <FaBolt className={`text-xs ${option.recommended ? 'text-emerald-500' : 'text-slate-400'}`} />
                         Instant Crediting
                     </li>
                     <li className="flex items-center gap-2">
-                         <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                        Secure Transaction
+                        <FaShieldAlt className={`text-xs ${option.recommended ? 'text-emerald-500' : 'text-slate-400'}`} />
+                        Secure Payment
                     </li>
                     <li className="flex items-center gap-2">
-                         <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                        <FaCheck className={`text-xs ${option.recommended ? 'text-emerald-500' : 'text-slate-400'}`} />
                         No Hidden Fees
                     </li>
                 </ul>
@@ -92,7 +98,7 @@ const PurchaseCoin = () => {
                 <button
                   onClick={() => handleBuy(option)}
                   disabled={loadingId === option.id}
-                  className="w-full mt-auto py-3.5 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold shadow-lg hover:shadow-indigo-200 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center gap-2 group"
+                  className={`w-full mt-auto py-3.5 px-6 rounded-xl text-white font-bold shadow-lg transition-all disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center gap-2 group bg-gradient-to-r ${option.color} hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]`}
                 >
                   {loadingId === option.id ? (
                      <span className="loading loading-spinner loading-sm"></span>
