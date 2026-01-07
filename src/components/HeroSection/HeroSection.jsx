@@ -1,200 +1,107 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router";
-import { FaChevronLeft, FaChevronRight, FaCoins, FaUsers, FaBolt, FaChartLine } from "react-icons/fa";
+import { FaBolt, FaChartLine, FaUsers } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 
 const HeroSection = () => {
-  const {user}=useAuth();
-  const slides = [
-  {
-    id: 1,
-    title: "Earn Money Completing Simple Tasks",
-    subtitle: "Join thousands of workers earning coins daily",
-    description: "Complete micro-tasks, earn coins, and withdraw your earnings instantly. No experience required.",
-    ctaText: "Start Earning Now",
-    ctaLink: user?"/dashboard/task-list": "/register",
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2664&auto=format&fit=crop", // Meeting/work
-    icon: FaCoins,
-    stats: [
-      { label: "Active Workers", value: "10,000+", icon: FaUsers },
-      { label: "Tasks Completed", value: "50,000+", icon: FaBolt },
-      { label: "Coins Earned", value: "1M+", icon: FaChartLine },
-    ],
-  },
-  {
-    id: 2,
-    title: "Post Tasks & Get Results Fast",
-    subtitle: "Hire skilled workers for your micro-tasks",
-    description:
-      "Need help with social media engagement, data entry, or content moderation? Post your task and get it done within hours.",
-    ctaText: "Post Your First Task",
-    ctaLink: user?"/dashboard/add-task": "/register",
-    image: "https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=2670&auto=format&fit=crop", // Modern office/tech
-    icon: FaBolt,
-    stats: [
-      { label: "Avg. Completion", value: "2 Hours", icon: FaBolt },
-      { label: "Success Rate", value: "98%", icon: FaChartLine },
-      { label: "Buyers Trust", value: "5,000+", icon: FaUsers },
-    ],
-  },
-  {
-    id: 3,
-    title: "Secure & Transparent Platform",
-    subtitle: "Your trusted micro-task marketplace",
-    description:
-      "Built with security and transparency in mind. Track every transaction, manage your earnings, and grow your income safely.",
-    ctaText: "Learn More",
-    ctaLink: "/about",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop", // Security/Tech
-    icon: FaChartLine,
-    stats: [
-      { label: "Secure Payments", value: "100%", icon: FaChartLine },
-      { label: "Daily Payouts", value: "24/7", icon: FaBolt },
-      { label: "User Rating", value: "4.8/5", icon: FaUsers },
-    ],
-  },
-];
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const nextSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const prevSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const goToSlide = (index) => {
-    if (isAnimating || index === currentSlide) return;
-    setIsAnimating(true);
-    setCurrentSlide(index);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  // Auto-advance slides
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [currentSlide, isAnimating]);
-
-  const slide = slides[currentSlide];
+  const { user } = useAuth();
 
   return (
-    <div className="relative min-h-[600px] md:h-[calc(100vh-4rem)] w-full overflow-hidden bg-slate-900">
-      
-      {/* Background Images */}
-      {slides.map((s, index) => (
-        <div
-            key={s.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-        >
-            <img 
-                src={s.image} 
-                alt={s.title}
-                className="w-full h-full object-cover"
-                loading={index === 0 ? "eager" : "lazy"}
-            />
-             {/* Gradient Overlay for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/30" />
-        </div>
-      ))}
+    <div className="relative min-h-[480px] w-full overflow-hidden bg-slate-900 flex items-center py-12 md:py-20">
+      {/* Optimized Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2664&auto=format&fit=crop"
+          alt="Earn Money Completing Tasks"
+          className="w-full h-full object-cover opacity-40"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent" />
+      </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-start py-12 md:py-20">
-        <div className="max-w-3xl text-left text-white">
-          
-          {/* Subtitle */}
-          <div
-            className={`inline-block mb-4 md:mb-6 px-4 py-1.5 md:py-2 bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 rounded-full transition-all duration-500 ease-out ${
-              isAnimating ? "translate-x-10 opacity-0" : "translate-x-0 opacity-100"
-            }`}
-          >
-            <p className="text-emerald-300 text-xs md:text-sm font-semibold tracking-wide uppercase">{slide.subtitle}</p>
+      {/* Content Container */}
+      <div className="relative z-10 container mx-auto px-6 md:px-12 w-full">
+        <div className="max-w-4xl text-left">
+          {/* Subtitle Badge */}
+          <div className="inline-block mb-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full backdrop-blur-sm">
+            <p className="text-emerald-400 text-sm font-semibold tracking-wide uppercase">
+              Join thousands of workers earning coins daily
+            </p>
           </div>
 
-          {/* Title */}
-          <h1
-            className={`text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight transition-all duration-500 delay-100 ease-out ${
-              isAnimating ? "translate-x-10 opacity-0" : "translate-x-0 opacity-100"
-            }`}
-          >
-            {slide.title}
+          {/* Main Title */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+            Earn Money Completing <br className="hidden md:block" />
+            <span className="text-emerald-400">Simple Tasks</span>
           </h1>
 
           {/* Description */}
-          <p
-            className={`text-lg md:text-xl text-slate-200 mb-8 max-w-2xl leading-relaxed transition-all duration-500 delay-200 ease-out ${
-              isAnimating ? "translate-x-10 opacity-0" : "translate-x-0 opacity-100"
-            }`}
-          >
-            {slide.description}
+          <p className="text-lg text-slate-300 mb-8 max-w-2xl leading-relaxed">
+            Complete micro-tasks, earn coins, and withdraw your earnings instantly.
+            No experience required to start your journey today.
           </p>
 
-          {/* CTA Button */}
-          <div
-            className={`mb-12 transition-all duration-500 delay-300 ease-out flex gap-4 ${
-              isAnimating ? "translate-x-10 opacity-0" : "translate-x-0 opacity-100"
-            }`}
-          >
-            <Link to={slide.ctaLink} className="btn btn-lg bg-emerald-600 hover:bg-emerald-500 text-white border-none px-8 font-bold shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 transition-all hover:-translate-y-1 rounded-xl">
-                {slide.ctaText}
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-5 mb-10">
+            <Link
+              to={user ? "/dashboard/task-list" : "/register"}
+              className="btn btn-lg bg-emerald-600 hover:bg-emerald-500 text-white border-none px-8 h-12 min-h-[3rem] font-bold shadow-lg shadow-emerald-600/20 rounded-xl text-base"
+            >
+              Start Earning Now
+            </Link>
+            <Link
+              to="/about"
+              className="btn btn-lg bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 h-12 min-h-[3rem] font-bold backdrop-blur-sm rounded-xl text-base"
+            >
+              Learn More
             </Link>
           </div>
 
           {/* Stats Row */}
-           <div 
-             className={`flex flex-wrap gap-8 items-center border-t border-white/10 pt-8 transition-all duration-500 delay-500 ease-out ${
-               isAnimating ? "opacity-0" : "opacity-100"
-             }`}
-           >
-                {slide.stats.map((stat, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-emerald-400">
-                             <stat.icon />
-                        </div>
-                        <div>
-                            <div className="text-2xl font-bold text-white">{stat.value}</div>
-                            <div className="text-sm text-slate-400">{stat.label}</div>
-                        </div>
-                    </div>
-                ))}
+          <div className="flex flex-wrap gap-x-12 gap-y-6 items-center border-t border-white/10 pt-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                <FaUsers />
+              </div>
+              <div>
+                <div className="text-xl font-bold text-white">10k+</div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider">Workers</div>
+              </div>
             </div>
-
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                <FaBolt />
+              </div>
+              <div>
+                <div className="text-xl font-bold text-white">50k+</div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider">Tasks</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                <FaChartLine />
+              </div>
+              <div>
+                <div className="text-xl font-bold text-white">1M+</div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider">Coins</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-white">4.9/5</div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider">Rating</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Navigation Arrows */}
-      <div className="absolute right-4 bottom-8 md:right-10 md:bottom-10 flex gap-4 z-20">
-        <button
-            onClick={prevSlide}
-            disabled={isAnimating}
-            className="p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 rounded-full text-white transition-all disabled:opacity-50 group"
-            aria-label="Previous slide"
-        >
-            <FaChevronLeft className="group-hover:-translate-x-0.5 transition-transform" />
-        </button>
-        <button
-            onClick={nextSlide}
-            disabled={isAnimating}
-            className="p-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full transition-all disabled:opacity-50 shadow-lg shadow-emerald-600/20 group"
-            aria-label="Next slide"
-        >
-            <FaChevronRight className="group-hover:translate-x-0.5 transition-transform" />
-        </button>
-      </div>
-      
     </div>
   );
 };
