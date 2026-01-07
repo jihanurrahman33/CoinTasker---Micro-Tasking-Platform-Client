@@ -8,6 +8,9 @@ import AuthProvider from "./contexts/AuthContext/AuthProvider.jsx";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
+
+// Optimization: Prefetch Home chunk immediately to fix LCP
+import("./pages/Home/Home");
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>

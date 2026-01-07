@@ -26,44 +26,100 @@
       />
     </noscript>
     <style>
-      .app-shell {
-        position: fixed;
+      /* Critical CSS for Static Hero - Inline to prevent blocking */
+      body { margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; background: #0F172A; }
+      .static-shell {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #0F172A;
+      }
+      .static-gradient {
+        position: absolute;
         inset: 0;
-        z-index: 9999;
+        /* Fallback dark background matching the image overlay */
+        background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        z-index: 0;
+      }
+      .static-content {
+        position: relative;
+        z-index: 10;
         display: flex;
         flex-direction: column;
+        align-items: flex-start; /* Aligned left now */
         justify-content: center;
-        align-items: center;
-        /* Matches Hero Section Gradient */
-        background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #065f46 100%);
+        height: 100vh;
+        text-align: left; /* Aligned left now */
         color: white;
-        font-family: system-ui, -apple-system, sans-serif;
-        transition: opacity 0.5s ease-out;
+        padding: 0 5%;
+        max-width: 1200px;
+        margin: 0 auto;
       }
-      .shell-spinner {
-        width: 60px;
-        height: 60px;
-        border: 4px solid rgba(255, 255, 255, 0.2);
-        border-top-color: white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      .static-nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        z-index: 20;
+      }
+      .static-logo { font-weight: 800; font-size: 24px; color: white; letter-spacing: -0.02em; }
+      .static-h1 {
+        font-family: 'Outfit', system-ui, sans-serif;
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.1;
         margin-bottom: 20px;
+        opacity: 0; /* Fade in animation handled by CSS if needed, or JS */
+        animation: fadeInUp 0.8s ease-out forwards;
       }
-      .shell-text {
-        font-size: 1.25rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        animation: pulse 2s infinite;
+      .static-p {
+        font-size: 18px;
+        color: rgba(255,255,255,0.9);
+        max-width: 600px;
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out 0.2s forwards;
       }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes pulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.4; } }
+      .static-btn {
+        display: inline-block;
+        padding: 16px 32px;
+        background: #059669; /* Emerald 600 */
+        color: white;
+        font-weight: 700;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.2);
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out 0.4s forwards;
+      }
+      @media (max-width: 768px) {
+        .static-h1 { font-size: 36px; }
+        .static-shell { min-height: 500px; } /* Match Hero Mobile Height */
+      }
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
     </style>
   </head>
   <body class="bg-slate-50 text-slate-900 antialiased selection:bg-emerald-100 selection:text-emerald-900">
     <div id="root">
-      <div class="app-shell">
-        <div class="shell-spinner"></div>
-        <div class="shell-text">COINTASKER</div>
+      <!-- "Manual SSG" - Static Content for Instant FCP/LCP -->
+      <div class="static-shell">
+        <div class="static-gradient"></div>
+        <div class="static-nav">
+          <div class="static-logo">CoinTasker</div>
+        </div>
+        <div class="static-content">
+          <h1 class="static-h1">Earn Money Completing Simple Tasks</h1>
+          <p class="static-p">Join thousands of workers earning coins daily. Complete micro-tasks and withdraw instantly.</p>
+          <a href="#" class="static-btn">Start Earning Now</a>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>

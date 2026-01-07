@@ -10,9 +10,7 @@ import WorkerRoute from "./WorkerRoute";
 import Loading from "../components/shared/Loading/Loading";
 
 // Lazy load pages
-import Home from "../pages/Home/Home";
-// Lazy load pages
-// const Home = lazy(() => import("../pages/Home/Home"));
+const Home = lazy(() => import("../pages/Home/Home"));
 const Register = lazy(() => import("../pages/auth/Register/Register"));
 const Login = lazy(() => import("../pages/auth/Login/Login"));
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -49,7 +47,11 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <SuspenseLayout>
+            <Home />
+          </SuspenseLayout>
+        ),
       },
       {
         path: "register",
