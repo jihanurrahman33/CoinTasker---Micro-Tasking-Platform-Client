@@ -1,28 +1,44 @@
 import { createBrowserRouter } from "react-router";
+import React, { Suspense, lazy } from "react";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../pages/Home/Home";
-import Register from "../pages/auth/Register/Register";
-import Login from "../pages/auth/Login/Login";
-import PublicRoute from "./PublicRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import DashboardHome from "../pages/dashboard/home/DashboardHome";
-import Tasklist from "../pages/dashboard/Worker/Tasklist/Tasklist";
-import TaskDetails from "../pages/dashboard/Worker/TaskDetails/TaskDetails";
-import MySubmissions from "../pages/dashboard/Worker/MySubmissions/MySubmissions";
-import Withdrawals from "../pages/dashboard/Worker/Withdrawals/Withdrawals";
-import AddTask from "../pages/dashboard/Buyer/AddTask/AddTask";
-import MyTask from "../pages/dashboard/Buyer/MyTask/MyTask";
-import PurchaseCoin from "../pages/dashboard/Buyer/PurchaseCoin/PurchaseCoin";
-import PaymentHistory from "../pages/dashboard/Buyer/PaymentHistory/PaymentHistory";
-import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
-import ManageTasks from "../pages/dashboard/Admin/ManageTasks/ManageTasks";
-import PaymentSuccess from "../pages/dashboard/PaymentSuccess/PaymentSuccess";
-import PaymentCancelled from "../pages/dashboard/PaymentSuccess/PaymentCancelled";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
 import WorkerRoute from "./WorkerRoute";
-import PrivateRoute from "./PrivateRoute";
-import NotFound from "../pages/NotFound";
+import Loading from "../components/shared/Loading/Loading";
+
+// Lazy load pages
+const Home = lazy(() => import("../pages/Home/Home"));
+const Register = lazy(() => import("../pages/auth/Register/Register"));
+const Login = lazy(() => import("../pages/auth/Login/Login"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+
+// Dashboard - Home
+const DashboardHome = lazy(() => import("../pages/dashboard/home/DashboardHome"));
+
+// Dashboard - Worker
+const Tasklist = lazy(() => import("../pages/dashboard/Worker/Tasklist/Tasklist"));
+const TaskDetails = lazy(() => import("../pages/dashboard/Worker/TaskDetails/TaskDetails"));
+const MySubmissions = lazy(() => import("../pages/dashboard/Worker/MySubmissions/MySubmissions"));
+const Withdrawals = lazy(() => import("../pages/dashboard/Worker/Withdrawals/Withdrawals"));
+
+// Dashboard - Buyer
+const AddTask = lazy(() => import("../pages/dashboard/Buyer/AddTask/AddTask"));
+const MyTask = lazy(() => import("../pages/dashboard/Buyer/MyTask/MyTask"));
+const PurchaseCoin = lazy(() => import("../pages/dashboard/Buyer/PurchaseCoin/PurchaseCoin"));
+const PaymentHistory = lazy(() => import("../pages/dashboard/Buyer/PaymentHistory/PaymentHistory"));
+const PaymentSuccess = lazy(() => import("../pages/dashboard/PaymentSuccess/PaymentSuccess"));
+const PaymentCancelled = lazy(() => import("../pages/dashboard/PaymentSuccess/PaymentCancelled"));
+
+// Dashboard - Admin
+const ManageUsers = lazy(() => import("../pages/dashboard/Admin/ManageUsers/ManageUsers"));
+const ManageTasks = lazy(() => import("../pages/dashboard/Admin/ManageTasks/ManageTasks"));
+
+const SuspenseLayout = ({ children }) => (
+  <Suspense fallback={<Loading />}>{children}</Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -31,13 +47,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <SuspenseLayout>
+            <Home />
+          </SuspenseLayout>
+        ),
       },
       {
         path: "register",
         element: (
           <PublicRoute>
-            <Register />
+            <SuspenseLayout>
+              <Register />
+            </SuspenseLayout>
           </PublicRoute>
         ),
       },
@@ -45,7 +67,9 @@ export const router = createBrowserRouter([
         path: "login",
         element: (
           <PublicRoute>
-            <Login />
+            <SuspenseLayout>
+              <Login />
+            </SuspenseLayout>
           </PublicRoute>
         ),
       },
@@ -53,68 +77,152 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
-        element: <DashboardHome />,
+        element: (
+          <SuspenseLayout>
+            <DashboardHome />
+          </SuspenseLayout>
+        ),
       },
       // Worker Routes
       {
         path: "task-list",
-        element: <WorkerRoute><Tasklist /></WorkerRoute>,
+        element: (
+          <WorkerRoute>
+            <SuspenseLayout>
+              <Tasklist />
+            </SuspenseLayout>
+          </WorkerRoute>
+        ),
       },
       {
         path: "task-list/:id",
-        element: <WorkerRoute><TaskDetails /></WorkerRoute>,
+        element: (
+          <WorkerRoute>
+            <SuspenseLayout>
+              <TaskDetails />
+            </SuspenseLayout>
+          </WorkerRoute>
+        ),
       },
       {
         path: "my-submissions",
-        element: <WorkerRoute><MySubmissions /></WorkerRoute>,
+        element: (
+          <WorkerRoute>
+            <SuspenseLayout>
+              <MySubmissions />
+            </SuspenseLayout>
+          </WorkerRoute>
+        ),
       },
       {
         path: "withdrawals",
-        element: <WorkerRoute><Withdrawals /></WorkerRoute>,
+        element: (
+          <WorkerRoute>
+            <SuspenseLayout>
+              <Withdrawals />
+            </SuspenseLayout>
+          </WorkerRoute>
+        ),
       },
       //Buyer Routes
       {
         path: "add-task",
-        element: <BuyerRoute><AddTask /></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <SuspenseLayout>
+              <AddTask />
+            </SuspenseLayout>
+          </BuyerRoute>
+        ),
       },
       {
         path: "my-tasks",
-        element: <BuyerRoute><MyTask /></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <SuspenseLayout>
+              <MyTask />
+            </SuspenseLayout>
+          </BuyerRoute>
+        ),
       },
       {
         path: "purchase-coin",
-        element: <BuyerRoute><PurchaseCoin /></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <SuspenseLayout>
+              <PurchaseCoin />
+            </SuspenseLayout>
+          </BuyerRoute>
+        ),
       },
       {
         path: "payment-history",
-        element: <BuyerRoute><PaymentHistory /></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <SuspenseLayout>
+              <PaymentHistory />
+            </SuspenseLayout>
+          </BuyerRoute>
+        ),
       },
       //admin Routes
       {
         path: "manage-users",
-        element: <AdminRoute><ManageUsers /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <SuspenseLayout>
+              <ManageUsers />
+            </SuspenseLayout>
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-tasks",
-        element: <AdminRoute><ManageTasks /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <SuspenseLayout>
+              <ManageTasks />
+            </SuspenseLayout>
+          </AdminRoute>
+        ),
       },
       //payment routes buyer
       {
         path: "payment-success",
-        element: <BuyerRoute><PaymentSuccess /></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <SuspenseLayout>
+              <PaymentSuccess />
+            </SuspenseLayout>
+          </BuyerRoute>
+        ),
       },
       {
         path: "payment-cancelled",
-        element: <BuyerRoute><PaymentCancelled /></BuyerRoute>,
+        element: (
+          <BuyerRoute>
+            <SuspenseLayout>
+              <PaymentCancelled />
+            </SuspenseLayout>
+          </BuyerRoute>
+        ),
       },
     ],
   },
   {
     path: "*",
-    element: <NotFound />,
+    element: (
+      <SuspenseLayout>
+        <NotFound />
+      </SuspenseLayout>
+    ),
   },
 ]);

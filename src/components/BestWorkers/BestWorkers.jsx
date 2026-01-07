@@ -63,7 +63,7 @@ const BestWorkers = () => {
             <FaTrophy className="w-5 h-5 text-accent" />
             <span className="text-sm font-semibold text-accent-content/80 text-accent">Top Performers</span>
           </div>
-          <h2
+           <h2
             className={`text-4xl md:text-5xl font-heading font-bold mb-4 text-secondary transition-all duration-700 delay-100 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
@@ -71,7 +71,7 @@ const BestWorkers = () => {
             Best Workers
           </h2>
           <p
-            className={`text-lg text-slate-500 max-w-2xl mx-auto transition-all duration-700 delay-200 ${
+            className={`text-lg text-slate-600 max-w-2xl mx-auto transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
@@ -111,6 +111,9 @@ const BestWorkers = () => {
                         <img
                           src={worker.photoURL}
                           alt={worker.name}
+                          width="96"
+                          height="96"
+                          loading="lazy"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       </div>
@@ -123,7 +126,7 @@ const BestWorkers = () => {
                     {/* Worker Info */}
                     <div className="text-center mb-4">
                       <h3 className="text-xl font-bold text-secondary mb-1">{worker.name}</h3>
-                      <p className="text-sm text-slate-500">{worker.task_completed} Tasks Completed</p>
+                      <p className="text-sm text-slate-600">{worker.task_completed} Tasks Completed</p>
                     </div>
     
                     {/* Coins Display */}
@@ -136,7 +139,7 @@ const BestWorkers = () => {
                           {worker?.coin?.toLocaleString()}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400 text-center uppercase tracking-wider font-semibold">Total Earnings</p>
+                      <p className="text-xs text-slate-500 text-center uppercase tracking-wider font-semibold">Total Earnings</p>
                     </div>
     
                     {/* Performance Indicator */}

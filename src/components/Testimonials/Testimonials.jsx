@@ -150,7 +150,13 @@ const Testimonials = () => {
                         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                             <div className="avatar">
                                 <div className="w-16 h-16 rounded-full ring ring-indigo-100 ring-offset-base-100 ring-offset-2">
-                                    <img src={testimonial.image} alt={testimonial.name} />
+                                    <img 
+                                      src={testimonial.image} 
+                                      alt={testimonial.name} 
+                                      width="64"
+                                      height="64"
+                                      loading="lazy"
+                                    />
                                 </div>
                             </div>
                             <div className="text-center md:text-left">

@@ -97,11 +97,11 @@ const HeroSection = () => {
         className={`absolute inset-0 bg-gradient-to-br ${slide.bgGradient} transition-all duration-700 ease-in-out`}
       />
 
-      {/* Animated background patterns */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-40 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-700" />
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-white rounded-full blur-3xl animate-pulse delay-1000" />
+      {/* Animated background patterns - optimized for mobile */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none hidden md:block">
+        <div className="absolute top-10 left-10 w-48 h-48 md:w-72 md:h-72 bg-white rounded-full blur-xl md:blur-3xl animate-pulse" />
+        <div className="absolute top-40 right-20 w-64 h-64 md:w-96 md:h-96 bg-white rounded-full blur-xl md:blur-3xl animate-pulse delay-700" />
+        <div className="absolute bottom-20 left-1/3 w-56 h-56 md:w-80 md:h-80 bg-white rounded-full blur-xl md:blur-3xl animate-pulse delay-1000" />
       </div>
 
       {/* Content */}

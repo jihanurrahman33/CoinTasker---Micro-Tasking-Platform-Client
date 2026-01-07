@@ -72,9 +72,9 @@ const PlatformStatistics = () => {
   return (
     <section className="relative py-20 bg-slate-50 overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-700"></div>
-      <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-accent/5 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl animate-pulse hidden md:block"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-700 hidden md:block"></div>
+      <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-accent/5 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000 hidden md:block"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section header */}
