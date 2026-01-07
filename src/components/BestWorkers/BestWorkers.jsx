@@ -109,7 +109,12 @@ const BestWorkers = () => {
                     <div className="relative mb-4">
                       <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl group-hover:border-primary/30 transition-colors duration-300">
                         <img
-                          src={worker.photoURL}
+                          src={(() => {
+                            if (worker.photoURL?.includes('githubusercontent.com')) {
+                              return `${worker.photoURL}${worker.photoURL.includes('?') ? '&' : '?'}s=200`;
+                            }
+                            return worker.photoURL;
+                          })()}
                           alt={worker.name}
                           width="96"
                           height="96"

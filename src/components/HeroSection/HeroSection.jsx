@@ -91,7 +91,7 @@ const HeroSection = () => {
   const Icon = slide.icon;
 
   return (
-    <div className="relative h-[calc(100vh-4rem)] w-full overflow-hidden bg-base-100">
+    <div className="relative min-h-[500px] md:h-[calc(100vh-4rem)] w-full overflow-hidden bg-base-100">
       {/* Background with gradient */}
       <div
         className={`absolute inset-0 bg-gradient-to-br ${slide.bgGradient} transition-all duration-700 ease-in-out`}
