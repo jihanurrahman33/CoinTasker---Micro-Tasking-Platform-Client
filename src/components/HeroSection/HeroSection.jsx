@@ -3,8 +3,6 @@ import { Link } from "react-router";
 import { FaChevronLeft, FaChevronRight, FaCoins, FaUsers, FaBolt, FaChartLine } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 
-
-
 const HeroSection = () => {
   const {user}=useAuth();
   const slides = [
@@ -15,7 +13,7 @@ const HeroSection = () => {
     description: "Complete micro-tasks, earn coins, and withdraw your earnings instantly. No experience required.",
     ctaText: "Start Earning Now",
     ctaLink: user?"/dashboard/task-list": "/register",
-    bgGradient: "from-indigo-600 via-blue-600 to-indigo-700",
+    bgGradient: "from-emerald-600 via-teal-600 to-emerald-800",
     icon: FaCoins,
     stats: [
       { label: "Active Workers", value: "10,000+", icon: FaUsers },
@@ -31,7 +29,7 @@ const HeroSection = () => {
       "Need help with social media engagement, data entry, or content moderation? Post your task and get it done within hours.",
     ctaText: "Post Your First Task",
     ctaLink: user?"/dashboard/add-task": "/register",
-    bgGradient: "from-purple-600 via-indigo-600 to-blue-600",
+    bgGradient: "from-secondary via-slate-800 to-slate-900",
     icon: FaBolt,
     stats: [
       { label: "Avg. Completion", value: "2 Hours", icon: FaBolt },
@@ -47,7 +45,7 @@ const HeroSection = () => {
       "Built with security and transparency in mind. Track every transaction, manage your earnings, and grow your income safely.",
     ctaText: "Learn More",
     ctaLink: "/about",
-    bgGradient: "from-blue-600 via-cyan-600 to-teal-600",
+    bgGradient: "from-teal-600 via-cyan-700 to-teal-800",
     icon: FaChartLine,
     stats: [
       { label: "Secure Payments", value: "100%", icon: FaChartLine },
@@ -111,7 +109,7 @@ const HeroSection = () => {
         <div className="max-w-5xl mx-auto text-center text-white px-4">
           {/* Icon - Smaller on mobile */}
           <div
-            className={`inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-sm rounded-2xl mb-4 md:mb-6 transition-all duration-500 ease-out ${
+            className={`inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl mb-4 md:mb-6 transition-all duration-500 ease-out ${
               isAnimating ? "scale-0 opacity-0" : "scale-100 opacity-100"
             }`}
           >
@@ -120,16 +118,16 @@ const HeroSection = () => {
 
           {/* Subtitle */}
           <div
-            className={`inline-block mb-4 md:mb-6 px-4 py-1.5 md:py-2 bg-white/20 backdrop-blur-sm rounded-full transition-all duration-500 delay-100 ease-out ${
+            className={`inline-block mb-4 md:mb-6 px-4 py-1.5 md:py-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full transition-all duration-500 delay-100 ease-out ${
               isAnimating ? "translate-y-10 opacity-0" : "translate-y-0 opacity-100"
             }`}
           >
-            <p className="text-white/90 text-xs md:text-sm font-medium tracking-wide uppercase">{slide.subtitle}</p>
+            <p className="text-emerald-50 text-xs md:text-sm font-semibold tracking-wide uppercase">{slide.subtitle}</p>
           </div>
 
           {/* Title - Responsive sizing */}
           <h1
-            className={`text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight transition-all duration-500 delay-200 ease-out ${
+            className={`text-3xl md:text-5xl lg:text-7xl font-heading font-bold text-white mb-4 md:mb-6 leading-tight transition-all duration-500 delay-200 ease-out ${
               isAnimating ? "translate-y-10 opacity-0" : "translate-y-0 opacity-100"
             }`}
           >
@@ -138,7 +136,7 @@ const HeroSection = () => {
 
           {/* Description */}
           <p
-            className={`text-base md:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed transition-all duration-500 delay-300 ease-out ${
+            className={`text-base md:text-xl text-emerald-50/90 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed transition-all duration-500 delay-300 ease-out ${
               isAnimating ? "translate-y-10 opacity-0" : "translate-y-0 opacity-100"
             }`}
           >
@@ -151,7 +149,7 @@ const HeroSection = () => {
               isAnimating ? "translate-y-10 opacity-0" : "translate-y-0 opacity-100"
             }`}
           >
-            <Link to={slide.ctaLink} className="btn btn-md md:btn-lg bg-white text-indigo-600 hover:bg-gray-100 border-none px-8 font-bold shadow-xl hover:shadow-2xl transition-all hover:scale-105 rounded-full">
+            <Link to={slide.ctaLink} className="btn btn-md md:btn-lg bg-white text-emerald-700 hover:bg-emerald-50 border-none px-8 font-bold shadow-xl hover:shadow-2xl transition-all hover:scale-105 rounded-full ring-2 ring-white/50">
                 {slide.ctaText}
             </Link>
           </div>
@@ -164,7 +162,7 @@ const HeroSection = () => {
       <button
         onClick={prevSlide}
         disabled={isAnimating}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/20 backdrop-blur-md hover:bg-white/30 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed group active:scale-90"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed group active:scale-90"
         aria-label="Previous slide"
       >
         <FaChevronLeft className="w-6 h-6 text-white group-hover:-translate-x-1 transition-transform" />
@@ -173,7 +171,7 @@ const HeroSection = () => {
       <button
         onClick={nextSlide}
         disabled={isAnimating}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/20 backdrop-blur-md hover:bg-white/30 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed group active:scale-90"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed group active:scale-90"
         aria-label="Next slide"
       >
         <FaChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform" />
