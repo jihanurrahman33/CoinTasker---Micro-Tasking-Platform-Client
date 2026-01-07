@@ -22,6 +22,7 @@ import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
 import WorkerRoute from "./WorkerRoute";
 import PrivateRoute from "./PrivateRoute";
+import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +115,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <div>404 Not Found</div>,
+    element: <NotFound />,
   },
 ]);

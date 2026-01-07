@@ -14,6 +14,7 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 import { Link } from "react-router";
+import { CardSkeleton } from "../../../../components/shared/Skeleton";
 
 const Tasklist = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -211,10 +212,7 @@ const Tasklist = () => {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl h-80 animate-pulse shadow-md"
-              ></div>
+              <CardSkeleton key={i} />
             ))}
           </div>
         ) : (

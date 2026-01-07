@@ -10,6 +10,7 @@ import { auth } from "../../../firebase/firebase.init";
 import useAxios from "../../../hooks/useAxios";
 import Logo from "../../../components/shared/Logo/Logo";
 import { useQueryClient } from "@tanstack/react-query";
+import SEO from "../../../components/SEO";
 
 const Register = () => {
     const queryClient = useQueryClient();
@@ -79,26 +80,25 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 px-4 py-12 relative overflow-hidden">
-        
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 relative overflow-hidden px-4 py-8">
+      <SEO title="Create Account" description="Join CoinTasker today and start earning rewards." />
+
       {/* Background Decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-200/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-200/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px]" />
       </div>
 
       <div className="w-full max-w-lg relative z-10 animate-fade-in-up">
         {/* Header */}
          <div className="text-center mb-8">
-             <div className="flex justify-center mb-6">
-                <Logo />
-             </div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">Create Account</h1>
-            <p className="text-slate-600">Start earning or managing tasks today</p>
+            
+            <h1 className="text-3xl font-heading font-bold text-slate-900 mb-2">Create Account</h1>
+            <p className="text-slate-500">Start earning or managing tasks today</p>
         </div>
 
         {/* Register Card */}
-        <div className="card bg-white/80 backdrop-blur-sm shadow-xl border border-white/50 ring-1 ring-slate-200/50">
+        <div className="card glass-panel p-1">
             <div className="card-body p-8 space-y-4">
                  
                  <h2 className="text-2xl font-bold text-center text-slate-900 mb-2">Register</h2>
@@ -107,13 +107,13 @@ const Register = () => {
                     
                     {/* Name */}
                     <div className="form-control space-y-1">
-                        <label className="label-text font-semibold text-slate-900 text-sm">Full Name <span className="text-error">*</span></label>
-                        <div className="relative">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"><FaUser /></div>
+                        <label className="label-text font-medium text-slate-700">Full Name <span className="text-error">*</span></label>
+                        <div className="relative group">
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors pointer-events-none"><FaUser /></div>
                             <input
                                 type="text"
                                 placeholder="John Doe"
-                                className={`input input-bordered w-full pl-11 h-11 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white ${errors.name ? 'input-error' : ''}`}
+                                className={`input input-bordered w-full pl-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.name ? 'input-error' : ''}`}
                                 {...register("name", { required: "Name is required" })}
                             />
                         </div>
@@ -122,13 +122,13 @@ const Register = () => {
 
                     {/* Email */}
                     <div className="form-control space-y-1">
-                        <label className="label-text font-semibold text-slate-900 text-sm">Email Address <span className="text-error">*</span></label>
-                        <div className="relative">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"><FaEnvelope /></div>
+                        <label className="label-text font-medium text-slate-700">Email Address <span className="text-error">*</span></label>
+                        <div className="relative group">
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors pointer-events-none"><FaEnvelope /></div>
                             <input
                                 type="email"
                                 placeholder="you@example.com"
-                                className={`input input-bordered w-full pl-11 h-11 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white ${errors.email ? 'input-error' : ''}`}
+                                className={`input input-bordered w-full pl-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.email ? 'input-error' : ''}`}
                                 {...register("email", { 
                                     required: "Email is required",
                                     pattern: {
@@ -143,13 +143,13 @@ const Register = () => {
 
                     {/* Profile Picture */}
                     <div className="form-control space-y-1">
-                        <label className="label-text font-semibold text-slate-900 text-sm">Profile Picture URL <span className="text-slate-400 font-normal">(Optional)</span></label>
-                        <div className="relative">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"><FaImage /></div>
+                        <label className="label-text font-medium text-slate-700">Profile Picture URL <span className="text-slate-400 font-normal">(Optional)</span></label>
+                        <div className="relative group">
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors pointer-events-none"><FaImage /></div>
                             <input
                                 type="url"
                                 placeholder="https://example.com/profile.jpg"
-                                className={`input input-bordered w-full pl-11 h-11 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white ${errors.photoURL ? 'input-error' : ''}`}
+                                className={`input input-bordered w-full pl-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.photoURL ? 'input-error' : ''}`}
                                 {...register("photoURL", { required: "Profile picture URL is required" })}
                             />
                         </div>
@@ -158,9 +158,9 @@ const Register = () => {
 
                     {/* Role Selection */}
                     <div className="form-control space-y-1">
-                        <label className="label-text font-semibold text-slate-900 text-sm">Select Role <span className="text-error">*</span></label>
+                        <label className="label-text font-medium text-slate-700">Select Role <span className="text-error">*</span></label>
                         <select
-                            className={`select select-bordered w-full h-11 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white ${errors.role ? 'select-error' : ''}`}
+                            className={`select select-bordered w-full h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.role ? 'select-error' : ''}`}
                             defaultValue=""
                             {...register("role", { required: "Please select a role" })}
                         >
@@ -173,13 +173,13 @@ const Register = () => {
 
                     {/* Password */}
                     <div className="form-control space-y-1">
-                         <label className="label-text font-semibold text-slate-900 text-sm">Password <span className="text-error">*</span></label>
-                        <div className="relative">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"><FaLock /></div>
+                         <label className="label-text font-medium text-slate-700">Password <span className="text-error">*</span></label>
+                        <div className="relative group">
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors pointer-events-none"><FaLock /></div>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Create a strong password"
-                                className={`input input-bordered w-full pl-11 pr-11 h-11 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white ${errors.password ? 'input-error' : ''}`}
+                                className={`input input-bordered w-full pl-11 pr-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.password ? 'input-error' : ''}`}
                                 {...register("password", { 
                                     required: "Password is required",
                                     minLength: { value: 6, message: "Min 6 chars" },
@@ -189,16 +189,16 @@ const Register = () => {
                                     }
                                 })}
                             />
-                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600" onClick={() => setShowPassword(!showPassword)}>
+                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setShowPassword(!showPassword)}>
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                               </button>
                         </div>
                         {/* Strength Indicator */}
                         {passwordStrength && (
-                            <div className="flex gap-1 mt-1 h-1 w-full">
-                                <div className={`h-full rounded-full transition-all duration-300 w-1/3 ${passwordStrength === 'weak' || passwordStrength === 'medium' || passwordStrength === 'strong' ? getPasswordStrengthColor() : 'bg-base-200'}`}></div>
-                                <div className={`h-full rounded-full transition-all duration-300 w-1/3 ${passwordStrength === 'medium' || passwordStrength === 'strong' ? getPasswordStrengthColor() : 'bg-base-200'}`}></div>
-                                <div className={`h-full rounded-full transition-all duration-300 w-1/3 ${passwordStrength === 'strong' ? getPasswordStrengthColor() : 'bg-base-200'}`}></div>
+                            <div className="flex gap-1 mt-1 h-1 w-full opacity-80">
+                                <div className={`h-full rounded-full transition-all duration-300 w-1/3 ${passwordStrength === 'weak' || passwordStrength === 'medium' || passwordStrength === 'strong' ? getPasswordStrengthColor() : 'bg-slate-200'}`}></div>
+                                <div className={`h-full rounded-full transition-all duration-300 w-1/3 ${passwordStrength === 'medium' || passwordStrength === 'strong' ? getPasswordStrengthColor() : 'bg-slate-200'}`}></div>
+                                <div className={`h-full rounded-full transition-all duration-300 w-1/3 ${passwordStrength === 'strong' ? getPasswordStrengthColor() : 'bg-slate-200'}`}></div>
                             </div>
                         )}
                         {errors.password && <span className="text-error text-xs mt-1 ml-1">{errors.password.message}</span>}
@@ -206,13 +206,13 @@ const Register = () => {
                     
                     {/* Confirm Password */}
                     <div className="form-control space-y-1">
-                         <label className="label-text font-semibold text-slate-900 text-sm">Confirm Password <span className="text-error">*</span></label>
-                        <div className="relative">
-                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"><FaLock /></div>
+                         <label className="label-text font-medium text-slate-700">Confirm Password <span className="text-error">*</span></label>
+                        <div className="relative group">
+                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors pointer-events-none"><FaLock /></div>
                             <input
                                 type={showConfirmPassword ? "text" : "password"}
                                 placeholder="Re-enter your password"
-                                className={`input input-bordered w-full pl-11 pr-11 h-11 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white ${errors.confirmPassword ? 'input-error' : ''}`}
+                                className={`input input-bordered w-full pl-11 pr-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.confirmPassword ? 'input-error' : ''}`}
                                 {...register("confirmPassword", { 
                                     required: "Please confirm your password",
                                     validate: (val) => {
@@ -222,7 +222,7 @@ const Register = () => {
                                     } 
                                 })}
                             />
-                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                               </button>
                         </div>
@@ -233,22 +233,22 @@ const Register = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="btn btn-primary w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-primary/30 border-none bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white mt-2"
+                        className="btn btn-primary w-full h-12 text-base font-semibold rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 border-none bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white mt-2 transform hover:-translate-y-0.5 transition-all duration-300"
                     >
                         {loading ? <FaSpinner className="animate-spin mr-2" /> : "Create Account"}
                     </button>
 
                  </form>
 
-                <div className="divider text-sm text-slate-500 my-4">Or continue with</div>
+                <div className="divider text-sm text-slate-400 font-medium my-4">Or continue with</div>
 
-                <div className="w-full [&_button]:w-full [&_button]:btn-outline [&_button]:h-12 [&_button]:rounded-xl [&_button]:border-slate-200 [&_button]:bg-transparent [&_button]:hover:bg-slate-50">
+                <div className="w-full [&_button]:w-full [&_button]:btn-outline [&_button]:h-12 [&_button]:rounded-xl [&_button]:border-slate-200 [&_button]:bg-white [&_button]:hover:bg-slate-50 [&_button]:text-slate-700 [&_button]:hover:border-slate-300 [&_button]:transition-all">
                     <SocialLogin />
                 </div>
 
                 <p className="text-center text-sm text-slate-600 mt-4">
                     Already have an account?{" "}
-                    <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">
+                    <Link to="/login" className="font-semibold text-primary hover:text-primary-focus hover:underline transition-colors">
                         Sign in
                     </Link>
                 </p>
@@ -258,9 +258,9 @@ const Register = () => {
         
          <p className="mt-8 text-center text-sm text-slate-500">
              By creating an account, you agree to our{" "}
-            <a href="#" className="font-medium text-indigo-600 hover:underline">Terms of Service</a>
+            <a href="#" className="font-medium text-slate-700 hover:text-primary hover:underline transition-colors">Terms of Service</a>
             {" "}and{" "}
-            <a href="#" className="font-medium text-indigo-600 hover:underline">Privacy Policy</a>
+            <a href="#" className="font-medium text-slate-700 hover:text-primary hover:underline transition-colors">Privacy Policy</a>
         </p>
 
       </div>
