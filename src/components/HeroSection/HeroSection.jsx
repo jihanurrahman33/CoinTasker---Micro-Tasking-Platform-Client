@@ -11,7 +11,7 @@ const HeroSection = () => {
       {/* Optimized Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2664&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=75&w=1200&auto=format&fit=crop"
           alt="Earn Money Completing Tasks"
           className="w-full h-full object-cover opacity-40"
           fetchPriority="high"
