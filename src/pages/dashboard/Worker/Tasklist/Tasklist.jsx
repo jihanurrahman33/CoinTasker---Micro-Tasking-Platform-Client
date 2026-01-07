@@ -63,7 +63,8 @@ const Tasklist = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-6 md:p-8">
+
+    <div className="min-h-screen bg-slate-50 p-6 md:p-8">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div
@@ -72,14 +73,14 @@ const Tasklist = () => {
           }`}
         >
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
+            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-emerald-600 flex items-center justify-center shadow-lg shadow-primary/20">
               <FaList className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h1 className="text-3xl md:text-4xl font-bold font-heading text-secondary">
               Available Tasks
             </h1>
           </div>
-          <p className="text-gray-600 max-w-2xl ml-1 text-lg">
+          <p className="text-slate-500 max-w-2xl ml-1 text-lg">
             Browse and select tasks to complete. Earn coins by helping buyers with
             their micro-tasks.
           </p>
@@ -92,61 +93,61 @@ const Tasklist = () => {
           }`}
         >
           {/* Stat 1 */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-indigo-50 bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
+          <div className="card glass-panel p-6 bg-gradient-to-br from-slate-50 to-white">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-1">
+                <p className="text-sm font-medium text-slate-500 mb-1">
                   Total Tasks
                 </p>
-                <p className="text-3xl font-bold text-indigo-900">
+                <p className="text-3xl font-bold text-secondary">
                   {filteredTasks.length}
                 </p>
               </div>
-              <div className="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                <FaList className="h-6 w-6 text-indigo-600" />
+              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <FaList className="h-6 w-6 text-primary" />
               </div>
             </div>
           </div>
 
           {/* Stat 2 */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-amber-50 bg-gradient-to-br from-amber-50/50 to-yellow-50/50">
+          <div className="card glass-panel p-6 bg-gradient-to-br from-amber-50/50 to-white">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-1">
+                <p className="text-sm font-medium text-slate-500 mb-1">
                   Earnings Potential
                 </p>
                 <div className="flex items-center gap-1">
-                  <p className="text-3xl font-bold text-amber-900">
+                  <p className="text-3xl font-bold text-accent">
                     {filteredTasks.reduce(
                       (sum, task) => sum + task.payable_amount,
                       0
                     )}
                   </p>
-                  <FaCoins className="h-5 w-5 text-amber-600 mt-1" />
+                  <FaCoins className="h-5 w-5 text-amber-500 mt-1" />
                 </div>
               </div>
-              <div className="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center">
-                <FaChartLine className="h-6 w-6 text-amber-600" />
+              <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center">
+                <FaChartLine className="h-6 w-6 text-accent" />
               </div>
             </div>
           </div>
 
           {/* Stat 3 */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-green-50 bg-gradient-to-br from-green-50/50 to-emerald-50/50">
+          <div className="card glass-panel p-6 bg-gradient-to-br from-emerald-50/50 to-white">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-1">
+                <p className="text-sm font-medium text-slate-500 mb-1">
                   Total Positions
                 </p>
-                <p className="text-3xl font-bold text-green-900">
+                <p className="text-3xl font-bold text-emerald-600">
                   {filteredTasks.reduce(
                     (sum, task) => sum + task.required_workers,
                     0
                   )}
                 </p>
               </div>
-              <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-                <FaUsers className="h-6 w-6 text-green-600" />
+              <div className="h-12 w-12 rounded-full bg-emerald-100 flex items-center justify-center">
+                <FaUsers className="h-6 w-6 text-emerald-600" />
               </div>
             </div>
           </div>
@@ -161,13 +162,13 @@ const Tasklist = () => {
           }`}
         >
           <div className="relative flex-1">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
             <input
               type="text"
               placeholder="Search by task title or buyer name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 h-12 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all outline-none bg-white shadow-sm"
+              className="w-full pl-12 pr-4 h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none bg-white shadow-sm"
             />
           </div>
 
@@ -176,8 +177,8 @@ const Tasklist = () => {
               onClick={() => setFilter("all")}
               className={`px-4 py-2 rounded-xl flex items-center gap-2 font-medium transition-all ${
                 filter === "all"
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                  : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                  ? "bg-primary text-white shadow-lg shadow-primary/20"
+                  : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
               }`}
             >
               <FaFilter className="h-4 w-4" />
@@ -188,7 +189,7 @@ const Tasklist = () => {
               className={`px-4 py-2 rounded-xl flex items-center gap-2 font-medium transition-all ${
                 filter === "high-pay"
                   ? "bg-amber-500 text-white shadow-lg shadow-amber-200"
-                  : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                  : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
               }`}
             >
               <FaCoins className="h-4 w-4" />
@@ -199,7 +200,7 @@ const Tasklist = () => {
               className={`px-4 py-2 rounded-xl flex items-center gap-2 font-medium transition-all ${
                 filter === "urgent"
                   ? "bg-red-500 text-white shadow-lg shadow-red-200"
-                  : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                  : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
               }`}
             >
               <FaCalendarAlt className="h-4 w-4" />
@@ -219,16 +220,16 @@ const Tasklist = () => {
           /* Task Cards Grid */
           <>
             {filteredTasks.length === 0 ? (
-              <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
+              <div className="card glass-panel p-12 text-center">
                 <div className="flex flex-col items-center gap-4">
-                  <div className="h-20 w-20 rounded-full bg-gray-50 flex items-center justify-center">
-                    <FaSearch className="h-8 w-8 text-gray-400" />
+                  <div className="h-20 w-20 rounded-full bg-slate-50 flex items-center justify-center">
+                    <FaSearch className="h-8 w-8 text-slate-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                    <h3 className="text-xl font-bold text-secondary mb-1">
                       No tasks found
                     </h3>
-                    <p className="text-gray-500">
+                    <p className="text-slate-500">
                       Try adjusting your search or filters to find what you're
                       looking for.
                     </p>
@@ -244,7 +245,7 @@ const Tasklist = () => {
                   return (
                     <div
                       key={task._id}
-                      className={`group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${
+                      className={`group card glass-panel overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${
                         isVisible ? "opacity-100" : "opacity-0"
                       }`}
                       style={{
@@ -256,7 +257,7 @@ const Tasklist = () => {
                       }}
                     >
                       {/* Task Image Banner */}
-                      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
+                      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
                         {task.task_image_url ? (
                           <img
                             src={task.task_image_url}
@@ -264,7 +265,7 @@ const Tasklist = () => {
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
                         ) : (
-                           <div className="text-indigo-300">
+                           <div className="text-primary/30">
                                <FaList className="w-16 h-16 opacity-50"/>
                            </div>
                         )}
@@ -285,10 +286,10 @@ const Tasklist = () => {
 
                       <div className="p-5">
                         <div className="mb-4">
-                          <h3 className="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-indigo-600 transition-colors">
+                          <h3 className="text-lg font-bold text-secondary line-clamp-2 mb-2 group-hover:text-primary transition-colors">
                             {task.task_title}
                           </h3>
-                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <div className="flex items-center gap-2 text-sm text-slate-500">
                             <FaUser className="h-3 w-3" />
                             <span>Posted by {task.buyer_name}</span>
                           </div>
@@ -296,13 +297,13 @@ const Tasklist = () => {
 
                         <div className="space-y-3 mb-6">
                             {/* Payment */}
-                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl border border-amber-100">
-                            <span className="text-sm text-gray-700 font-medium">
+                          <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span className="text-sm text-slate-700 font-medium">
                               Payment
                             </span>
                             <div className="flex items-center gap-1">
-                              <FaCoins className="h-4 w-4 text-amber-600" />
-                              <span className="text-lg font-bold text-amber-900">
+                              <FaCoins className="h-4 w-4 text-amber-500" />
+                              <span className="text-lg font-bold text-amber-600">
                                 {task.payable_amount} coins
                               </span>
                             </div>
@@ -310,13 +311,13 @@ const Tasklist = () => {
 
                           {/* Details */}
                           <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-500 flex items-center gap-1">
+                            <span className="text-slate-500 flex items-center gap-1">
                               <FaCalendarAlt className="h-4 w-4" />
                               Deadline
                             </span>
                             <span
                               className={`font-semibold ${
-                                isUrgent ? "text-red-600" : "text-gray-700"
+                                isUrgent ? "text-red-500" : "text-slate-700"
                               }`}
                             >
                              {new Date(task.completion_date).toLocaleDateString()}
@@ -324,11 +325,11 @@ const Tasklist = () => {
                           </div>
 
                           <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-500 flex items-center gap-1">
+                            <span className="text-slate-500 flex items-center gap-1">
                               <FaUsers className="h-4 w-4" />
                               Positions Left
                             </span>
-                            <span className="bg-indigo-100 text-indigo-700 font-bold px-2 py-0.5 rounded-md">
+                            <span className="bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-md">
                               {task.required_workers}
                             </span>
                           </div>
@@ -338,7 +339,7 @@ const Tasklist = () => {
                           to={`/dashboard/task-list/${task._id}`}
                           className="w-full inline-block"
                         >
-                          <button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group/btn">
+                          <button className="w-full btn btn-primary-gradient py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group/btn">
                             <FaEye className="h-4 w-4" />
                             View Details
                             <FaChevronRight className="h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
