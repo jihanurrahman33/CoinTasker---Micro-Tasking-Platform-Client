@@ -9,7 +9,7 @@ const NotFound = () => {
             <SEO title="Page Not Found" />
             
              {/* Background Decoration */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
                 <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-100/50 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-700" />
             </div>

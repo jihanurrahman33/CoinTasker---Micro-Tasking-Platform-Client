@@ -127,6 +127,7 @@ const NavBar = () => {
                   target="_blank"
                   className="btn btn-square btn-ghost text-slate-400 hover:text-secondary transition-colors"
                   title="Developer"
+                  aria-label="View Developer Profile"
                 >
                   <FaGithub className="size-5" />
                 </a>
@@ -138,6 +139,7 @@ const NavBar = () => {
           <button
             className="btn btn-ghost md:hidden text-slate-600"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? (
               <FaTimes className="size-6" />

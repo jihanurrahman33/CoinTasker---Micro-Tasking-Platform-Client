@@ -40,7 +40,7 @@ const Login = () => {
       <SEO title="Login" description="Sign in to your CoinTasker account to start earning." />
       
       {/* Background Decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]" />
       </div>
@@ -72,6 +72,7 @@ const Login = () => {
                                 type="email"
                                 placeholder="you@example.com"
                                 className={`input input-bordered w-full pl-11 h-12 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.email ? 'input-error' : ''}`}
+                                aria-invalid={errors.email ? "true" : "false"}
                                 {...register("email", { 
                                     required: "Email is required",
                                     pattern: {
@@ -102,6 +103,7 @@ const Login = () => {
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Enter your password"
                                 className={`input input-bordered w-full pl-11 pr-11 h-12 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.password ? 'input-error' : ''}`}
+                                aria-invalid={errors.password ? "true" : "false"}
                                 {...register("password", { 
                                     required: "Password is required",
                                     minLength: {
@@ -114,6 +116,7 @@ const Login = () => {
                                 type="button"
                                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                                 onClick={() => setShowPassword(!showPassword)}
+                                aria-label={showPassword ? "Hide password" : "Show password"}
                               >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                               </button>

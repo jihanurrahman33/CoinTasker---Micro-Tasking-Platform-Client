@@ -71,7 +71,7 @@ const WhyChooseUs = () => {
   return (
     <section ref={sectionRef} className="relative py-20 px-4 bg-white overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>

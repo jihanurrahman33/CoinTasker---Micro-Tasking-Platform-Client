@@ -78,7 +78,7 @@ const HowItWorks = () => {
       className="relative py-20 px-4 bg-slate-50 overflow-hidden"
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-pulse delay-700" />
       </div>

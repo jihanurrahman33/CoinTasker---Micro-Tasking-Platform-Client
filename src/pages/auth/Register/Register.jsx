@@ -84,7 +84,7 @@ const Register = () => {
       <SEO title="Create Account" description="Join CoinTasker today and start earning rewards." />
 
       {/* Background Decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px]" />
       </div>
@@ -113,6 +113,7 @@ const Register = () => {
                                 type="text"
                                 placeholder="John Doe"
                                 className={`input input-bordered w-full pl-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.name ? 'input-error' : ''}`}
+                                aria-invalid={errors.name ? "true" : "false"}
                                 {...register("name", { required: "Name is required" })}
                             />
                         </div>
@@ -128,6 +129,7 @@ const Register = () => {
                                 type="email"
                                 placeholder="you@example.com"
                                 className={`input input-bordered w-full pl-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.email ? 'input-error' : ''}`}
+                                aria-invalid={errors.email ? "true" : "false"}
                                 {...register("email", { 
                                     required: "Email is required",
                                     pattern: {
@@ -149,6 +151,7 @@ const Register = () => {
                                 type="url"
                                 placeholder="https://example.com/profile.jpg"
                                 className={`input input-bordered w-full pl-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.photoURL ? 'input-error' : ''}`}
+                                aria-invalid={errors.photoURL ? "true" : "false"}
                                 {...register("photoURL", { required: "Profile picture URL is required" })}
                             />
                         </div>
@@ -161,6 +164,7 @@ const Register = () => {
                         <select
                             className={`select select-bordered w-full h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.role ? 'select-error' : ''}`}
                             defaultValue=""
+                            aria-invalid={errors.role ? "true" : "false"}
                             {...register("role", { required: "Please select a role" })}
                         >
                             <option value="" disabled>Choose your role</option>
@@ -179,6 +183,7 @@ const Register = () => {
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Create a strong password"
                                 className={`input input-bordered w-full pl-11 pr-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.password ? 'input-error' : ''}`}
+                                aria-invalid={errors.password ? "true" : "false"}
                                 {...register("password", { 
                                     required: "Password is required",
                                     minLength: { value: 6, message: "Min 6 chars" },
@@ -188,7 +193,7 @@ const Register = () => {
                                     }
                                 })}
                             />
-                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setShowPassword(!showPassword)}>
+                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Hide password" : "Show password"}>
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                               </button>
                         </div>
@@ -212,6 +217,7 @@ const Register = () => {
                                 type={showConfirmPassword ? "text" : "password"}
                                 placeholder="Re-enter your password"
                                 className={`input input-bordered w-full pl-11 pr-11 h-11 rounded-xl bg-slate-50/50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 ${errors.confirmPassword ? 'input-error' : ''}`}
+                                aria-invalid={errors.confirmPassword ? "true" : "false"}
                                 {...register("confirmPassword", { 
                                     required: "Please confirm your password",
                                     validate: (val) => {
@@ -221,7 +227,7 @@ const Register = () => {
                                     } 
                                 })}
                             />
-                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                             <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" onClick={() => setShowConfirmPassword(!showConfirmPassword)} aria-label={showConfirmPassword ? "Hide password" : "Show password"}>
                                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                               </button>
                         </div>
