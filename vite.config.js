@@ -8,10 +8,19 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
-          ui: ['framer-motion', 'react-icons', 'sweetalert2', 'react-toastify'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('firebase')) {
+              return 'firebase';
+            }
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || id.includes('scheduler') || id.includes('@remix-run')) {
+              return 'react-core';
+            }
+            if (id.includes('framer-motion') || id.includes('react-icons') || id.includes('react-toastify') || id.includes('sweetalert2')) {
+              return 'ui-libs';
+            }
+            return 'vendor';
+          }
         },
       },
     },

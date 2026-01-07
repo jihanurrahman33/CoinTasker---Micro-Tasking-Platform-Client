@@ -155,7 +155,9 @@ const Testimonials = () => {
                                       alt={testimonial.name} 
                                       width="64"
                                       height="64"
-                                      loading="lazy"
+                                      loading={isActive ? "eager" : "lazy"}
+                                      fetchPriority={isActive ? "high" : "auto"}
+                                      decoding="async"
                                     />
                                 </div>
                             </div>
